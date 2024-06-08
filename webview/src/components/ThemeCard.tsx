@@ -17,7 +17,7 @@ interface Props {
 const ThemeCard: React.FC<Props> = ({ id, name, label, group, onChange }) => {
 	
 	return (
-		<label className="button-hoverBackground relative mb-6 h-80 w-80 shrink-0 cursor-pointer rounded border-2 border-solid border-transparent [&:has(input[type='radio']:checked)]:border-white">
+		<label className="relative mb-6 h-80 w-80 shrink-0 cursor-pointer rounded border-2 border-solid border-transparent bg-opacity-20 hover:bg-neutral-500 [&:has(input[type='radio']:checked)]:border-white">
 			<input onChange={() => onChange(label)} type="radio" name="theme-selection opacity-0 absolute pointer-events-none" />
 			<div className="text-left">id: {id}</div>
 			<div className="text-left">label: {label}</div>

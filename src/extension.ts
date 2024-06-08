@@ -23,13 +23,26 @@ export function activate(context: vscode.ExtensionContext) {
       const panel = vscode.window.createWebviewPanel(
         "viewThemes",
         "view your local themes",
-        vscode.ViewColumn.Active
+        {
+          viewColumn: vscode.ViewColumn.Active,
+        },
+        {
+          enableScripts: true,
+        }
       );
       const scriptPath = panel.webview.asWebviewUri(
-        vscode.Uri.joinPath(context.extensionUri, "media", "script.js")
+        vscode.Uri.joinPath(
+          context.extensionUri,
+          "./webview/dist/assets/",
+          "index-DONsvf3q.js"
+        )
       );
       const cssStyle = panel.webview.asWebviewUri(
-        vscode.Uri.joinPath(context.extensionUri, "./view/style", "view.css")
+        vscode.Uri.joinPath(
+          context.extensionUri,
+          "./webview/dist/assets/",
+          "index-DiwrgTda.css"
+        )
       );
 
       panel.webview.html = `<!DOCTYPE html>
@@ -37,19 +50,11 @@ export function activate(context: vscode.ExtensionContext) {
 			<head>
 				<meta charset="UTF-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<link rel="stylesheet" type="text/css" href="${cssStyle}" />
-				<script src="${scriptPath}"></script>
+				<link rel="stylesheet" crossorigin type="text/css" href="${cssStyle}" />
+				<script type="module" crossorigin src="${scriptPath}"></script>
 			</head>
 			<body>
-			<div class="container">
-				<div class="form">
-					<code>Title</code>
-					<input />
-					<code>Code</code>
-					<textarea></textarea>
-					<button>Submit</button>
-				</div>
-			</div>
+				<div id="root"></div>
 			</body>
 			</html>`;
     }

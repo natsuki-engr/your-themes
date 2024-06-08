@@ -14,8 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "theme-view.helloWorld",
-        "title": "Hello World"
+        "command": "theme-view.viewThemes",
+        "title": "Open viewer"
       }
     ]
   },

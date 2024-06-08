@@ -5,6 +5,6 @@ const config: Config = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require('@githubocto/tailwind-vscode')],
 };
 export default config;

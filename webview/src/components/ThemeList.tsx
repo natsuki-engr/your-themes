@@ -3,10 +3,10 @@ import { updateColorSetting } from "../controllers/updateColorSetting";
 import ThemeCard from "./ThemeCard";
 
 const ThemeList = ({ themeGroups }: { themeGroups: ThemeGroupInfo[] }) => {
-	const changeHandler = (label: string) => {
-		updateColorSetting(label, 'user')
-	}
-	
+  const changeHandler = (label: string) => {
+    updateColorSetting(label, "user");
+  };
+
   return (
     <div className="mb-2">
       {themeGroups.map((group) => {
@@ -17,9 +17,9 @@ const ThemeList = ({ themeGroups }: { themeGroups: ThemeGroupInfo[] }) => {
                 <ThemeCard
                   id={theme.id}
                   name={theme.label}
-									label={theme.label}
+                  label={theme.label}
                   group={group.id}
-									onChange={changeHandler}
+                  onChange={changeHandler}
                 ></ThemeCard>
               );
             })}

@@ -22,7 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand(
     "theme-view.viewThemes",
     async (_editBuilder, _editor, _selection, _dex) => {
-      createNewPanel(context)
+      createNewPanel(context);
     }
   );
 

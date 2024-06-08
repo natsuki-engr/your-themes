@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { getThemeInfoList } from "./theme-extension";
+import Logger from "./logger";
 
 export const createNewPanel = (
   context: vscode.ExtensionContext
@@ -45,6 +46,7 @@ export const createNewPanel = (
 
 const registerCommands = (panel: vscode.WebviewPanel) => {
   panel.webview.onDidReceiveMessage((message) => {
+    Logger.log('message' + JSON.stringify(message));
     switch (message.command) {
       case "get-theme-list":
         const themes = getThemeInfoList();

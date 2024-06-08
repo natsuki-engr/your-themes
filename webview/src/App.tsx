@@ -6,8 +6,7 @@ import {
 } from "../../src/types/themeInfo";
 import "vscode-webview";
 import ThemeList from "./components/ThemeList";
-
-const vscode = acquireVsCodeApi();
+import { getThemeList } from "./controllers/getThemeList";
 
 document.addEventListener('keyup', (e: KeyboardEvent) => {
   e.stopPropagation()
@@ -36,7 +35,7 @@ function App() {
     };
 
     window.addEventListener("message", onMessage);
-    vscode.postMessage({ command: "get-theme-list" });
+    getThemeList()
 
     return () => {
       window.removeEventListener("message", onMessage);

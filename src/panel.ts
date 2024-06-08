@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import { getThemeInfoList } from "./theme-extension";
 import Logger from "./logger";
+import { updateColorTheme } from "./messageController/updateColorTheme";
 
 export const createNewPanel = (
   context: vscode.ExtensionContext
@@ -45,9 +46,9 @@ export const createNewPanel = (
 };
 
 const registerCommands = (panel: vscode.WebviewPanel) => {
-  panel.webview.onDidReceiveMessage((message) => {
-    Logger.log('message' + JSON.stringify(message));
-    switch (message.command) {
+  panel.webview.onDidReceiveMessage((msg: Message) => {
+    Logger.log("msg" + JSON.stringify(msg));
+    switch (msg.command) {
       case "get-theme-list":
         const themes = getThemeInfoList();
         panel.webview.postMessage({
@@ -55,6 +56,18 @@ const registerCommands = (panel: vscode.WebviewPanel) => {
           json: themes,
         });
         return themes;
+      case "update-color":
+        updateColorTheme(msg.label, msg.target);
     }
   });
 };
+
+type Message =
+  | {
+      command: "get-theme-list";
+    }
+  | {
+      command: "update-color";
+      label: string;
+      target: string;
+    };

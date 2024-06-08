@@ -1,6 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
+import { createNewPanel } from "./panel";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -17,46 +18,11 @@ export function activate(context: vscode.ExtensionContext) {
   // 	// Display a message box to the user
   // 	vscode.window.showInformationMessage('Hello World from theme-view!');
   // });
+
   let disposable = vscode.commands.registerCommand(
     "theme-view.viewThemes",
-    (editBuilder, _editor, _selection, dex) => {
-      const panel = vscode.window.createWebviewPanel(
-        "viewThemes",
-        "view your local themes",
-        {
-          viewColumn: vscode.ViewColumn.Active,
-        },
-        {
-          enableScripts: true,
-        }
-      );
-      const scriptPath = panel.webview.asWebviewUri(
-        vscode.Uri.joinPath(
-          context.extensionUri,
-          "./webview/dist/",
-          "index.js"
-        )
-      );
-      const cssStyle = panel.webview.asWebviewUri(
-        vscode.Uri.joinPath(
-          context.extensionUri,
-          "./webview/dist/assets/",
-          "index.css"
-        )
-      );
-
-      panel.webview.html = `<!DOCTYPE html>
-			<html lang="en">
-			<head>
-				<meta charset="UTF-8">
-				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<link rel="stylesheet" crossorigin type="text/css" href="${cssStyle}" />
-				<script type="module" crossorigin src="${scriptPath}"></script>
-			</head>
-			<body>
-				<div id="root"></div>
-			</body>
-			</html>`;
+    async (_editBuilder, _editor, _selection, _dex) => {
+      createNewPanel(context)
     }
   );
 

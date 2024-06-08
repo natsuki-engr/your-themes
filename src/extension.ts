@@ -33,15 +33,15 @@ export function activate(context: vscode.ExtensionContext) {
       const scriptPath = panel.webview.asWebviewUri(
         vscode.Uri.joinPath(
           context.extensionUri,
-          "./webview/dist/assets/",
-          "index-DONsvf3q.js"
+          "./webview/dist/",
+          "index.js"
         )
       );
       const cssStyle = panel.webview.asWebviewUri(
         vscode.Uri.joinPath(
           context.extensionUri,
           "./webview/dist/assets/",
-          "index-DiwrgTda.css"
+          "index.css"
         )
       );
 

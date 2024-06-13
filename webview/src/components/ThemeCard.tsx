@@ -16,7 +16,7 @@ interface Props {
 }
 
 const colors = {
-	"tab.activeBackground": "#00F",
+	"tab.activeBackground": "#19433f",
 	"tab.activeForeground": "#FF0",
 	"tab.inactiveBackground": "#000",
 	"tab.inactiveForeground": "#FFF",

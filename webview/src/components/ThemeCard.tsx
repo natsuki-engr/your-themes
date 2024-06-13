@@ -4,6 +4,7 @@
 // }
 
 import React from "react";
+import VscodeSvg from "./VscodeSvg";
 
 interface Props {
 	// colors: PreviewColors
@@ -12,6 +13,25 @@ interface Props {
 	label: string
 	group: string
 	onChange: (label: string) => void
+}
+
+const colors = {
+	"tab.activeBackground": "#00F",
+	"tab.activeForeground": "#FF0",
+	"tab.inactiveBackground": "#000",
+	"tab.inactiveForeground": "#FFF",
+	"contrastActiveBorder": "#FF0",
+	"sideBar.background": "#000",
+	"editor.background": "#000",
+	"activityBar.background": "#000",
+	"activityBar.foreground": "#FF0",
+	"activityBarBadge.background": "#000",
+	"activityBarBadge.foreground": "#FFF",
+	"contrastBorder": "#0FF",
+	"statusBar.background": "#000",
+	"statusBar.foreground": "#FFF",
+	"titleBar.activeBackground": "#000",
+	"titleBar.border": "#ff0000",
 }
 
 const ThemeCard: React.FC<Props> = ({ id, name, label, group, onChange }) => {
@@ -23,14 +43,7 @@ const ThemeCard: React.FC<Props> = ({ id, name, label, group, onChange }) => {
 			<div className="text-left">label: {label}</div>
 			<div className="text-left">name: {name}</div>
 			<div className="text-left">group: {group}</div>
-			<ul>
-				{/* {Object.keys(colors).map((key: string) => (
-					<li>
-						<span>{key}: </span>
-						<span>{colors[key as keyof PreviewColors] ?? ''}</span>
-					</li>
-				))} */}
-			</ul>
+			<VscodeSvg colors={colors} />
 		</label>
 	)
 };

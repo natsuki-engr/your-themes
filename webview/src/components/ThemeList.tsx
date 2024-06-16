@@ -1,6 +1,6 @@
 import { ThemeGroupInfo } from "../../../src/types/themeInfo";
 import { updateColorSetting } from "../controllers/updateColorSetting";
-import ThemeCard from "./ThemeCard";
+import ThemeGroupRow from "./ThemeGroupRow";
 
 const ThemeList = ({ themeGroups }: { themeGroups: ThemeGroupInfo[] }) => {
   const changeHandler = (label: string) => {
@@ -9,23 +9,9 @@ const ThemeList = ({ themeGroups }: { themeGroups: ThemeGroupInfo[] }) => {
 
   return (
     <div className="mb-2">
-      {themeGroups.map((group) => {
-        return (
-          <div className="flex flex-wrap">
-            {group.themes.map((theme) => {
-              return (
-                <ThemeCard
-                  id={theme.id}
-                  name={theme.label}
-                  label={theme.label}
-                  group={group.id}
-                  onChange={changeHandler}
-                ></ThemeCard>
-              );
-            })}
-          </div>
-        );
-      })}
+      {themeGroups.map((group) => (
+        <ThemeGroupRow group={group} changeHandler={changeHandler} />
+      ))}
     </div>
   );
 };

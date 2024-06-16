@@ -1,6 +1,6 @@
 export interface ThemeGroupInfo {
   id: string;
-  themePath: string;
+  themeDir: string;
   themes: ThemeInfo[];
 }
 
@@ -15,8 +15,8 @@ export const isThemeGroupInfo = (data: any): data is ThemeGroupInfo => {
   return (
     "id" in data &&
     typeof data.id === "string" &&
-    "themePath" in data &&
-    typeof data.themePath === "string" &&
+    "themeDir" in data &&
+    typeof data.themeDir === "string" &&
     "themes" in data &&
     Array.isArray(data.themes) &&
     data.themes.every(isThemeInfo)

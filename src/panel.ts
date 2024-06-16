@@ -2,6 +2,8 @@ import * as vscode from "vscode";
 import { getThemeInfoList } from "./theme-extension";
 import Logger from "./logger";
 import { updateColorTheme } from "./messageController/updateColorTheme";
+import { getGroupColorThemes } from "./messageController/getGroupColorThemes";
+import { ThemeInfo } from "./types/themeInfo";
 
 export const createNewPanel = (
   context: vscode.ExtensionContext
@@ -45,8 +47,8 @@ export const createNewPanel = (
   return panel;
 };
 
-const registerCommands = (panel: vscode.WebviewPanel) => {
-  panel.webview.onDidReceiveMessage((msg: Message) => {
+const registerCommands = async (panel: vscode.WebviewPanel) => {
+  panel.webview.onDidReceiveMessage(async (msg: Message) => {
     Logger.log("msg" + JSON.stringify(msg));
     switch (msg.command) {
       case "get-theme-list":
@@ -55,19 +57,32 @@ const registerCommands = (panel: vscode.WebviewPanel) => {
           command: "resp-of-get-theme-list",
           json: themes,
         });
-        return themes;
+        return;
       case "update-color":
         updateColorTheme(msg.label, msg.target);
+        return;
+      case "get-group-color-themes":
+        const themesByLabel = await getGroupColorThemes(msg.themeDir, msg.themePathListByLabel);
+        panel.webview.postMessage({
+          command: "resp-of-get-group-color-themes",
+          json: {themes: themesByLabel, groupDir: msg.themeDir},
+        });
+        return;
     }
   });
 };
 
 type Message =
   | {
-      command: "get-theme-list";
-    }
+    command: "get-theme-list";
+  }
   | {
-      command: "update-color";
-      label: string;
-      target: string;
-    };
+    command: "update-color";
+    label: string;
+    target: string;
+  }
+  | {
+    command: "get-group-color-themes"
+    themeDir: string
+    themePathListByLabel: Record<ThemeInfo['label'], ThemeInfo['path']>
+  };

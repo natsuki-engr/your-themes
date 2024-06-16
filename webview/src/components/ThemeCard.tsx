@@ -1,5 +1,6 @@
 import React from "react";
 import VscodeSvg from "./VscodeSvg";
+import { SvgColors } from "../../../src/types/svgColors";
 
 interface Props {
 	// colors: PreviewColors
@@ -7,30 +8,11 @@ interface Props {
 	name: string
 	label: string
 	group: string
+	colors: SvgColors | null
 	onChange: (label: string) => void
 }
 
-const colors = {
-	"tab.activeBackground": "#19433f",
-	"tab.activeForeground": "#FF0",
-	"tab.inactiveBackground": "#000",
-	"tab.inactiveForeground": "#FFF",
-	"contrastActiveBorder": "#FF0",
-	"sideBar.background": "#000",
-	"editor.background": "#000",
-	"activityBar.background": "#000",
-	"activityBar.foreground": "#FF0",
-	"activityBarBadge.background": "#000",
-	"activityBarBadge.foreground": "#FFF",
-	"contrastBorder": "#0FF",
-	"statusBar.background": "#000",
-	"statusBar.foreground": "#FFF",
-	"titleBar.activeBackground": "#000",
-	"titleBar.border": "#ff0000",
-}
-
-const ThemeCard: React.FC<Props> = ({ id, name, label, group, onChange }) => {
-	
+const ThemeCard: React.FC<Props> = ({ id, name, label, group, colors, onChange }) => {
 	return (
 		<label className="relative mb-6 h-80 w-80 shrink-0 cursor-pointer rounded border-2 border-solid border-transparent bg-opacity-20 p-4 hover:bg-[rgba(128,128,128,0.15)] [&:has(input[type='radio']:checked)]:border-white">
 			<input onChange={() => onChange(label)} type="radio" className="theme-selection pointer-events-none absolute opacity-0" />

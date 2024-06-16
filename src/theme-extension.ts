@@ -31,7 +31,7 @@ export const getThemeInfoList = (): ThemeGroupInfo[] => {
 
     themeGroupInfo.push({
       id: theme.id,
-      themePath: theme.extensionPath,
+      themeDir: theme.extensionPath,
       themes: packageJson.contributes.themes.filter((themes: any) =>
         isThemeInfo(themes)
       ),

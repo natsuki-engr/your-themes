@@ -50,24 +50,30 @@ export const createNewPanel = (
 const registerCommands = async (panel: vscode.WebviewPanel) => {
   panel.webview.onDidReceiveMessage(async (msg: Message) => {
     Logger.log("msg" + JSON.stringify(msg));
-    switch (msg.command) {
-      case "get-theme-list":
-        const themes = getThemeInfoList();
-        panel.webview.postMessage({
-          command: "resp-of-get-theme-list",
-          json: themes,
-        });
-        return;
-      case "update-color":
-        updateColorTheme(msg.label, msg.target);
-        return;
-      case "get-group-color-themes":
-        const themesByLabel = await getGroupColorThemes(msg.themeDir, msg.themePathListByLabel);
-        panel.webview.postMessage({
-          command: "resp-of-get-group-color-themes",
-          json: {themes: themesByLabel, groupDir: msg.themeDir},
-        });
-        return;
+    try {
+      switch (msg.command) {
+        case "get-theme-list":
+          const themes = getThemeInfoList();
+          panel.webview.postMessage({
+            command: "resp-of-get-theme-list",
+            json: themes,
+          });
+          return;
+        case "update-color":
+          updateColorTheme(msg.label, msg.target);
+          return;
+        case "get-group-color-themes":
+          const themesByLabel = await getGroupColorThemes(msg.themeDir, msg.themePathListByLabel);
+          panel.webview.postMessage({
+            command: "resp-of-get-group-color-themes",
+            json: {themes: themesByLabel, groupDir: msg.themeDir},
+          });
+          return;
+      }
+    } catch (error) {
+      if(error instanceof Error) {
+        Logger.log("error" + JSON.stringify(error));
+      }
     }
   });
 };

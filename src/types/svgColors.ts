@@ -5,9 +5,11 @@ export const ColorOptions = [
   "tab.inactiveForeground",
   "contrastActiveBorder",
   "sideBar.background",
+  "sideBar.border",
   "editor.background",
   "activityBar.background",
   "activityBar.foreground",
+  "activityBar.border",
   "activityBarBadge.background",
   "activityBarBadge.foreground",
   "contrastBorder",
@@ -15,6 +17,11 @@ export const ColorOptions = [
   "statusBar.foreground",
   "titleBar.activeBackground",
   "titleBar.border",
+  "statusBar.border",
+  "focusBorder",
+  "editorGroupHeader.tabsBorder",
+  "editorGroupHeader.tabsBackground",
+  "tab.border",
 ] as const;
 
 export type SvgColors = Record<(typeof ColorOptions)[number], string>;
@@ -51,7 +58,7 @@ export const isSvgColors = (data: unknown): data is SvgColors => {
     ) {
       continue;
     } else {
-      return false;
+  return false;
     }
   }
 

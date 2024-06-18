@@ -12,46 +12,47 @@ const VscodeSvg: React.FC<Props> = ({ colors }) => {
 
 	const sideBarStyle = {
 		fill: colors?.["sideBar.background"],
-		stroke: colors?.["contrastBorder"],
+		stroke: colors?.["sideBar.border"],
 	}
 
 	const tabBgStyle = {
-		fill: colors?.["editor.background"],
-		stroke: colors?.["contrastBorder"],
+		fill: colors?.["editorGroupHeader.tabsBackground"],
+		stroke: colors?.["editorGroupHeader.tabsBorder"],
 	}
 
 	const tab1Style = {
 		fill: colors?.["tab.inactiveBackground"],
-		stroke: colors?.["contrastBorder"],
+		stroke: colors?.["tab.border"],
 	}
 
 	const tab2Style = {
 		fill: colors?.["tab.inactiveBackground"],
-		stroke: colors?.["contrastBorder"],
+		stroke: colors?.["tab.border"],
 	}
 
 	const tab3Style = {
 		fill: colors?.["tab.inactiveBackground"],
-		stroke: colors?.["contrastBorder"],
+		stroke: colors?.["tab.border"],
 	}
 
 	const activeTab1Style = {
 		fill: colors?.["tab.inactiveBackground"],
-		stroke: colors?.["contrastActiveBorder"],
+		stroke: colors?.["focusBorder"],
 	}
 
 	const activityBarStyle = {
 		fill: colors?.["activityBar.background"],
+		stroke: colors?.["activityBar.border"],
 	}
 
 	const titleBarStyle = {
 		fill: colors?.["titleBar.activeBackground"],
-		stroke: colors?.["contrastBorder"],
+		stroke: colors?.["titleBar.border"],
 	}
 
 	const statusBarStyle = {
 		fill: colors?.["statusBar.background"],
-		stroke: colors?.["contrastBorder"],
+		stroke: colors?.["statusBar.border"],
 	}
 
 	return (

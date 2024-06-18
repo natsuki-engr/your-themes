@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import Logger from "../logger";
 import { ThemeInfo } from "../types/themeInfo";
-import { SvgColors } from "../types/svgColors";
+import { ColorOptions, SvgColors } from "../types/svgColors";
 
 export const getGroupColorThemes = async (
   themeDir: string,
@@ -34,29 +34,11 @@ export const getGroupColorThemes = async (
         }
       };
 
-      const colorKeys: Array<keyof SvgColors> = [
-        "tab.activeBackground",
-        "tab.activeForeground",
-        "tab.inactiveBackground",
-        "tab.inactiveForeground",
-        "contrastActiveBorder",
-        "sideBar.background",
-        "editor.background",
-        "activityBar.background",
-        "activityBar.foreground",
-        "activityBarBadge.background",
-        "activityBarBadge.foreground",
-        "contrastBorder",
-        "statusBar.background",
-        "statusBar.foreground",
-        "titleBar.activeBackground",
-        "titleBar.border",
-      ];
-      colorKeys.forEach((key) => setColor(key));
+      ColorOptions.forEach((key) => setColor(key));
 
       colorThemesByLabel[themeLabel] = themeColors;
     } catch (error) {
-      if(error instanceof Error)  {
+      if (error instanceof Error) {
         Logger.log(`can't read theme file [${themeDir}]: ` + error.message);
       }
     }

@@ -4,6 +4,7 @@ import Logger from "./logger";
 import { updateColorTheme } from "./messageController/updateColorTheme";
 import { getGroupColorThemes } from "./messageController/getGroupColorThemes";
 import { ThemeInfo } from "./types/themeInfo";
+import { getCurrentTheme } from "./messageController/getCurrentTheme";
 
 export const createNewPanel = (
   context: vscode.ExtensionContext
@@ -66,7 +67,14 @@ const registerCommands = async (panel: vscode.WebviewPanel) => {
           const themesByLabel = await getGroupColorThemes(msg.themeDir, msg.themePathListByLabel);
           panel.webview.postMessage({
             command: "resp-of-get-group-color-themes",
-            json: {themes: themesByLabel, groupDir: msg.themeDir},
+            json: { themes: themesByLabel, groupDir: msg.themeDir },
+          });
+          return;
+        case "get-current-theme-label":
+          const currentTheme = getCurrentTheme();
+          panel.webview.postMessage({
+            command: "resp-of-get-current-theme-label",
+            json: { themeLabel: currentTheme },
           });
           return;
       }
@@ -88,7 +96,10 @@ type Message =
     target: string;
   }
   | {
-    command: "get-group-color-themes"
-    themeDir: string
-    themePathListByLabel: Record<ThemeInfo['label'], ThemeInfo['path']>
+      command: "get-group-color-themes";
+      themeDir: string;
+      themePathListByLabel: Record<ThemeInfo["label"], ThemeInfo["path"]>;
+    }
+  | {
+      command: "get-current-theme-label";
   };

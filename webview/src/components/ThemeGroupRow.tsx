@@ -8,10 +8,9 @@ import MessageListener from "../controllers/messageListener";
 
 interface Props {
   group: ThemeGroupInfo;
-  changeHandler: (label: string) => void;
 }
 
-const ThemeGroupRow: React.FC<Props> = ({ group, changeHandler }) => {
+const ThemeGroupRow: React.FC<Props> = ({ group }) => {
   const [colorByLabel, setColorByLabel] = useState<Record<string, SvgColors>>({});
 
   useEffect(() => {
@@ -44,7 +43,6 @@ const ThemeGroupRow: React.FC<Props> = ({ group, changeHandler }) => {
               id={theme.id}
               label={theme.label}
               colors={colorByLabel[theme.label] ?? null}
-              onChange={changeHandler}
             ></ThemeCard>
           );
         })}

@@ -35,20 +35,22 @@ const ThemeGroupRow: React.FC<Props> = ({ group, changeHandler }) => {
   }, [group.themeDir, group.themes]);
 
   return (
-    <div className="flex flex-wrap">
-      {group.themes.map((theme) => {
-        return (
-          <ThemeCard
-            id={theme.id}
-            name={theme.label}
-            label={theme.label}
-            group={group.id}
-            colors={colorByLabel[theme.label] ?? null}
-            onChange={changeHandler}
-          ></ThemeCard>
-        );
-      })}
-    </div>
+    <>
+      <h2 className="text-2 mb-2 mt-2 text-xl">{group.id}</h2>
+      <div className="flex flex-wrap">
+        {group.themes.map((theme) => {
+          return (
+            <ThemeCard
+              id={theme.id}
+              label={theme.label}
+              colors={colorByLabel[theme.label] ?? null}
+              onChange={changeHandler}
+            ></ThemeCard>
+          );
+        })}
+      </div>
+      <hr className="group bg-[rgba(128,128,128,0.15)] last-of-type:invisible" />
+    </>
   );
 };
 

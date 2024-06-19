@@ -39,5 +39,8 @@
     "eslint": "^8.57.0",
     "typescript": "^5.4.5",
     "vscode-webview": "^1.0.1-beta.1"
+  },
+  "dependencies": {
+    "json5": "^2.2.3"
   }
 }

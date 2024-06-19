@@ -1,4 +1,5 @@
 import fs from "fs";
+import JSON5 from "json5";
 import path from "path";
 import Logger from "../logger";
 import { ThemeInfo } from "../types/themeInfo";
@@ -13,7 +14,8 @@ export const getGroupColorThemes = async (
     try {
       const themePath = path.join(themeDir, themePathListByLabel[themeLabel] ?? "");
       const file = await fs.readFileSync(themePath, { encoding: "utf-8" });
-      const setting = JSON.parse(file) as unknown;
+
+      const setting = JSON5.parse(file) as unknown;
 
       const themeColors: SvgColors = {} as SvgColors;
       if (typeof setting !== "object" || setting === null || !("colors" in setting)) {

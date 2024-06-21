@@ -1,7 +1,10 @@
 import MessageListener from "./messageListener";
 import postMessage from "./postMessage";
 
-export const getCurrentThemeLabel = async (command: string, messageListener: MessageListener) => {
+export const command = "get-current-theme-label";
+
+export const getCurrentThemeLabel = async (command: string) => {
+  const messageListener = new MessageListener();
   return new Promise<string>((resolve) => {
     messageListener.receive("resp-of-" + command, (json) => {
       if (isResponse(json)) {

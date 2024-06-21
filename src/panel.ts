@@ -5,6 +5,7 @@ import { updateColorTheme } from "./messageController/updateColorTheme";
 import { getGroupColorThemes } from "./messageController/getGroupColorThemes";
 import { ThemeInfo } from "./types/themeInfo";
 import { getCurrentTheme } from "./messageController/getCurrentTheme";
+import { ConfigTargetValueType } from "./types/ConfigTarget";
 
 export const createNewPanel = (
   context: vscode.ExtensionContext
@@ -71,7 +72,7 @@ const registerCommands = async (panel: vscode.WebviewPanel) => {
           });
           return;
         case "get-current-theme-label":
-          const currentTheme = getCurrentTheme();
+          const currentTheme = getCurrentTheme(msg.target);
           panel.webview.postMessage({
             command: "resp-of-get-current-theme-label",
             json: { themeLabel: currentTheme },
@@ -102,4 +103,5 @@ type Message =
     }
   | {
       command: "get-current-theme-label";
+      target: ConfigTargetValueType
   };

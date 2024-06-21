@@ -23,7 +23,7 @@ const ThemeGroupRow: React.FC<Props> = ({ group }) => {
       }
 
       const groupColors = await getColorInfo(messageListener, group.themeDir, themePathListByLabel);
-      setColorByLabel(groupColors)
+      setColorByLabel(groupColors);
     };
 
     getEachColorTheme();

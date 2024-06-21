@@ -2,8 +2,7 @@ import React from "react";
 import VscodeSvg from "./VscodeSvg";
 import { SvgColors } from "../../../src/types/svgColors";
 import useSWR from "swr";
-import MessageListener from "../controllers/messageListener";
-import { getCurrentThemeLabel } from "../controllers/getCurrentThemeLabel";
+import { command as getCurrentThemeLabelCommand, getCurrentThemeLabel } from "../controllers/getCurrentThemeLabel";
 import { updateColorSetting } from "../controllers/updateColorSetting";
 
 interface Props {
@@ -13,10 +12,8 @@ interface Props {
 }
 
 const ThemeCard: React.FC<Props> = ({ label, colors }) => {
-  const command = "get-current-theme-label";
-  const { data: currentThemeLabel, mutate } = useSWR(command, (command) => {
-    const messageListener = new MessageListener();
-    return getCurrentThemeLabel(command, messageListener);
+  const { data: currentThemeLabel, mutate } = useSWR(getCurrentThemeLabelCommand, (command) => {
+    return getCurrentThemeLabel(command);
   });
 
   const changeHandler = (label: string) => {
@@ -33,7 +30,7 @@ const ThemeCard: React.FC<Props> = ({ label, colors }) => {
         value={label}
         checked={currentThemeLabel === label}
         type="radio"
-        className="theme-selection pointer-events-none absolute opacity-0"
+        className="pointer-events-none absolute opacity-0"
       />
       <h3 className="mb-2 mt-2 text-left">{label}</h3>
       <VscodeSvg colors={colors} />

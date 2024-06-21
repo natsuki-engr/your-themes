@@ -7,6 +7,7 @@ import {
 import "vscode-webview";
 import ThemeList from "./components/ThemeList";
 import { getThemeList } from "./controllers/getThemeList";
+import TargetTabs from "./components/TargetTabs";
 
 document.addEventListener('keyup', (e: KeyboardEvent) => {
   e.stopPropagation()
@@ -44,6 +45,8 @@ function App() {
 
   return (
     <div className="bg-vscode-editor-background w-full p-8">
+      <TargetTabs />
+
       {themeLists ? (
         <ThemeList themeGroups={themeLists}></ThemeList>
       ) : (

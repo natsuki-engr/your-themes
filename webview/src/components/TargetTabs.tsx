@@ -14,9 +14,9 @@ const TargetTabs: React.FC = () => {
   };
 
   return (
-    <ul className="flex">
-      <li>
-        <label className="cursor-pointer border-2 border-solid border-transparent p-3 has-[:checked]:border-white">
+    <ul className="bg-vscode-editor-background sideBarSectionHeader-border sticky top-0 z-10 flex h-12 w-full items-end pe-2 ps-2 pt-2">
+      <li className="block">
+        <label className="block cursor-pointer border-2 border-solid border-transparent p-3 has-[:checked]:border-b-white">
           User
           <input
             onChange={changeHandler}
@@ -28,8 +28,8 @@ const TargetTabs: React.FC = () => {
           />
         </label>
       </li>
-      <li>
-        <label className="cursor-pointer border-2 border-solid border-transparent p-3 has-[:checked]:border-white">
+      <li className="block">
+        <label className="block cursor-pointer border-2 border-solid border-transparent p-3 has-[:checked]:border-b-white">
           Workspace
           <input
             onChange={changeHandler}
@@ -41,8 +41,8 @@ const TargetTabs: React.FC = () => {
           />
         </label>
       </li>
-      <li>
-        <label className="cursor-pointer border-2 border-solid border-transparent p-3 has-[:checked]:border-white">
+      <li className="block">
+        <label className="block cursor-pointer border-2 border-solid border-transparent p-3 has-[:checked]:border-b-white">
           Folder
           <input
             onChange={changeHandler}

@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { mutate } from "swr";
-import { ConfigTarget } from "../../../src/types/ConfigTarget";
+import { ConfigTarget, ConfigTargetValueType } from "../../../src/types/ConfigTarget";
+import { useStaticSWR } from "../stores/useStaticSWR";
 
 const TargetTabs: React.FC = () => {
-  const [target, setTarget] = useState<(typeof ConfigTarget)[keyof typeof ConfigTarget]>(ConfigTarget.User);
+  const { data: target, mutate: setTarget } = useStaticSWR<ConfigTargetValueType>("config-target", ConfigTarget.User);
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    if (Object.values(ConfigTarget).some((value) => value === value)) {
-      setTarget(value as (typeof ConfigTarget)[keyof typeof ConfigTarget]);
+    if (Object.values(ConfigTarget).some((v) => v === value)) {
+      setTarget(value as ConfigTargetValueType);
     }
     mutate((key) => key === "get-current-theme-label", undefined, true);
   };

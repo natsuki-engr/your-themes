@@ -2,9 +2,14 @@ import ThemeCard from "./ThemeCard";
 
 import { getColorInfo } from "../controllers/getColorInfo";
 import { ThemeGroupInfo, ThemeInfo } from "../../../src/types/themeInfo";
+import { getCurrentThemeLabel, command as getCurrentThemeLabelCommand } from "../controllers/getCurrentThemeLabel";
 import { useEffect, useState } from "react";
 import { SvgColors } from "../../../src/types/svgColors";
 import MessageListener from "../controllers/messageListener";
+import useSWR, { mutate } from "swr";
+import { useStaticSWR } from "../stores/useStaticSWR";
+import { ConfigTarget, ConfigTargetValueType } from "../../../src/types/ConfigTarget";
+import { updateColorSetting } from "../controllers/updateColorSetting";
 
 interface Props {
   group: ThemeGroupInfo;
@@ -12,6 +17,17 @@ interface Props {
 
 const ThemeGroupRow: React.FC<Props> = ({ group }) => {
   const [colorByLabel, setColorByLabel] = useState<Record<string, SvgColors>>({});
+
+  const { data: target } = useStaticSWR<ConfigTargetValueType>("config-target", ConfigTarget.User);
+
+  const { data: currentThemeLabel } = useSWR([getCurrentThemeLabelCommand, target], ([command, target]) => {
+    return getCurrentThemeLabel(command, target);
+  });
+
+  const handleThemeSelect = (label: string) => {
+    updateColorSetting(label, target)
+    mutate(getCurrentThemeLabelCommand)
+  }
 
   useEffect(() => {
     const messageListener = new MessageListener();
@@ -43,6 +59,8 @@ const ThemeGroupRow: React.FC<Props> = ({ group }) => {
               id={theme.id}
               label={theme.label}
               colors={colorByLabel[theme.label] ?? null}
+              currentLabel={currentThemeLabel ?? ""}
+              onSelect={handleThemeSelect}
             ></ThemeCard>
           );
         })}

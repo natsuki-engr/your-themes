@@ -1,9 +1,10 @@
+import { ConfigTargetValueType } from "../../../src/types/ConfigTarget";
 import MessageListener from "./messageListener";
 import postMessage from "./postMessage";
 
 export const command = "get-current-theme-label";
 
-export const getCurrentThemeLabel = async (command: string) => {
+export const getCurrentThemeLabel = async (command: string, target: ConfigTargetValueType) => {
   const messageListener = new MessageListener();
   return new Promise<string>((resolve) => {
     messageListener.receive("resp-of-" + command, (json) => {
@@ -15,7 +16,7 @@ export const getCurrentThemeLabel = async (command: string) => {
       }
     });
 
-    postMessage.send(command);
+    postMessage.send(command, { target: target });
   });
 };
 

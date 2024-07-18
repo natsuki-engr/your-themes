@@ -1,6 +1,7 @@
 import { workspace, ConfigurationTarget } from "vscode";
+import { getCurrentTheme } from "./getCurrentTheme";
 
-export const updateColorTheme = (label: string, target: string) => {
+export const updateColorTheme = async (label: string, target: string) => {
   let configTarget:
     | (typeof ConfigurationTarget)[keyof typeof ConfigurationTarget]
     | null;
@@ -22,7 +23,7 @@ export const updateColorTheme = (label: string, target: string) => {
     throw new Error();
   }
 
-  workspace
+  await workspace
     .getConfiguration()
     .update("workbench.colorTheme", label, configTarget);
 };

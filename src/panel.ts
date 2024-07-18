@@ -62,7 +62,11 @@ const registerCommands = async (panel: vscode.WebviewPanel) => {
           });
           return;
         case "update-color":
-          updateColorTheme(msg.label, msg.target);
+          await updateColorTheme(msg.label, msg.target);
+          panel.webview.postMessage({
+            command: "resp-of-update-color",
+            json: {},
+          });
           return;
         case "get-group-color-themes":
           const themesByLabel = await getGroupColorThemes(msg.themeDir, msg.themePathListByLabel);

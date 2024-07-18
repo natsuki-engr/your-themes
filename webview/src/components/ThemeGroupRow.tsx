@@ -20,14 +20,19 @@ const ThemeGroupRow: React.FC<Props> = ({ group }) => {
 
   const { data: target } = useStaticSWR<ConfigTargetValueType>("config-target", ConfigTarget.User);
 
-  const { data: currentThemeLabel } = useSWR([getCurrentThemeLabelCommand, target], ([command, target]) => {
-    return getCurrentThemeLabel(command, target);
-  });
+  const { data: currentThemeLabel, mutate: mutateCurrentThemeLabel } = useSWR(
+    [getCurrentThemeLabelCommand, target],
+    ([command, target]) => {
+      return getCurrentThemeLabel(command, target);
+    }
+  );
 
-  const handleThemeSelect = (label: string) => {
-    updateColorSetting(label, target)
-    mutate(getCurrentThemeLabelCommand)
-  }
+  const handleThemeSelect = async (label: string) => {
+    const messageListener = new MessageListener();
+    mutateCurrentThemeLabel(label, false);
+    await updateColorSetting(messageListener, label, target);
+    mutate([getCurrentThemeLabelCommand, target]);
+  };
 
   useEffect(() => {
     const messageListener = new MessageListener();

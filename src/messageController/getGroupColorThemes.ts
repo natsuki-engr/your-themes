@@ -4,6 +4,7 @@ import path from "path";
 import Logger from "../logger";
 import { ThemeInfo } from "../types/themeInfo";
 import { ColorOptions, SvgColors } from "../types/svgColors";
+import { defaultColors } from "../defaults";
 
 export const getGroupColorThemes = async (
   themeDir: string,
@@ -22,17 +23,17 @@ export const getGroupColorThemes = async (
         continue;
       }
 
-      const colors = setting.colors as Record<string, unknown>;
+      const themeType = ("type" in setting ? setting.type : "dark") as "dark" | "light" | "hcDark" | "hcLight";
+
+      const colors = setting.colors as Record<string, string>;
       if (colors === null || typeof colors !== "object" || Array.isArray(colors)) {
         continue;
       }
 
       const setColor = (colorKey: keyof SvgColors) => {
-        if (colorKey in colors) {
-          const colorCode = colors[colorKey];
-          if (typeof colorCode === "string") {
-            themeColors[colorKey] = colorCode;
-          }
+        const colorCode = colors[colorKey] ?? defaultColors[colorKey][themeType];
+        if (typeof colorCode === "string") {
+          themeColors[colorKey] = colorCode;
         }
       };
 

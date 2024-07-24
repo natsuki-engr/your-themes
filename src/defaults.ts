@@ -56,10 +56,10 @@ export const defaultColors: Record<
     hcLight: "#FFFFFF",
   },
   "sideBar.border": {
-    dark: "#F3F3F3",
-    light: "#FFFFFF",
-    hcDark: "#6FC3DF",
-    hcLight: "#0F4A85",
+    dark: null,
+    light: null,
+    hcDark: contrastBorder.hcDark,
+    hcLight: contrastBorder.hcLight,
   },
   "editor.background": {
     light: "#ffffff",

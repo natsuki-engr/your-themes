@@ -30,6 +30,7 @@
   "devDependencies": {
     "@types/mocha": "^10.0.6",
     "@types/node": "18.x",
+    "@types/plist": "^3.0.5",
     "@types/vscode": "^1.89.0",
     "@types/vscode-webview": "^1.57.5",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
@@ -41,6 +42,7 @@
     "vscode-webview": "^1.0.1-beta.1"
   },
   "dependencies": {
-    "json5": "^2.2.3"
+    "json5": "^2.2.3",
+    "plist": "^3.1.0"
   }
 }

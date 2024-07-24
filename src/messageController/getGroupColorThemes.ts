@@ -51,7 +51,6 @@ const getThemeSettingObj = async (themeFilePath: string): Promise<ThemeConfig | 
   const ext = path.extname(themeFilePath);
   const file = await fs.readFileSync(themeFilePath, { encoding: "utf-8" });
 
-  Logger.log("ext.toLowerCase(): " + ext.toLowerCase());
   let content = null;
   switch (ext.toLowerCase()) {
     case ".json":
@@ -59,17 +58,14 @@ const getThemeSettingObj = async (themeFilePath: string): Promise<ThemeConfig | 
       if (!isThemeConfig(content)) {
         content = null;
       }
-
       break;
     case ".tmtheme":
       content = plist.parse(file) as unknown;
-      // Logger.log("content: " + JSON.stringify(content));
       if (!isTmTheme(content)) {
         content = null;
       } else {
         content = parseTmTheme(content);
       }
-      Logger.log("content: " + JSON.stringify(content));
       break;
   }
 

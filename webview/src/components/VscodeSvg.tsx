@@ -61,9 +61,6 @@ const VscodeSvg: React.FC<Props> = ({ colors }) => {
 
 	return (
 		<svg id="_レイヤー_2" data-name="レイヤー 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 961 721">
-			<defs>
-				<style>{"rect, path { fill: white; }"}</style>
-			</defs>
 			<g id="_レイヤー_1-2" data-name="レイヤー 1">
 				<rect id="editor" x=".5" y=".5" width="960" height="720" rx="22.34" ry="22.34" style={editorStyle}/>
 				<rect id="side-bar" x="80.5" y="70.5" width="175" height="590" style={sideBarStyle} />

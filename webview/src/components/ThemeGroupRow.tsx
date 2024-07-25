@@ -38,9 +38,15 @@ const ThemeGroupRow: React.FC<Props> = ({ group }) => {
     const messageListener = new MessageListener();
 
     const getEachColorTheme = async () => {
-      const themePathListByLabel: Record<ThemeInfo["label"], ThemeInfo["path"]> = {};
+      const themePathListByLabel: Record<
+        ThemeInfo["label"],
+        { path: ThemeInfo["path"]; uiTheme: ThemeInfo["uiTheme"] }
+      > = {};
       for (const theme of group.themes) {
-        themePathListByLabel[theme.label] = theme.path;
+        themePathListByLabel[theme.label] = {
+          path: theme.path,
+          uiTheme: theme.uiTheme,
+        };
       }
 
       const groupColors = await getColorInfo(messageListener, group.themeDir, themePathListByLabel);

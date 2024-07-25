@@ -9,15 +9,21 @@ import { defaultColors } from "../defaults";
 import { isTmTheme, TmTheme } from "../types/tmTheme";
 import { isThemeConfig, ThemeConfig } from "../types/themeConfig";
 import { parseTmTheme } from "../services/tmThemeService";
+import { ColorScheme, ColorSchemeType } from "../types/colorThemeSetting";
 
 export const getGroupColorThemes = async (
   themeDir: string,
-  themePathListByLabel: Record<ThemeInfo["label"], ThemeInfo["path"]>
+  themePathListByLabel: {
+    [label: ThemeInfo["label"]]: {
+      path: ThemeInfo["path"],
+      uiTheme: ThemeInfo["uiTheme"],
+    }
+  }
 ): Promise<Record<ThemeInfo["label"], SvgColors>> => {
   const colorThemesByLabel: Record<ThemeInfo["label"], SvgColors> = {};
   for (const themeLabel of Object.keys(themePathListByLabel)) {
     try {
-      const themePath = path.join(themeDir, themePathListByLabel[themeLabel] ?? "");
+      const themePath = path.join(themeDir, themePathListByLabel[themeLabel]?.path ?? "");
       const setting = await getThemeSettingObj(themePath);
       if (setting === null) {
         continue;
@@ -25,7 +31,7 @@ export const getGroupColorThemes = async (
 
       const themeColors: SvgColors = {} as SvgColors;
 
-      const themeType = ("type" in setting ? setting.type : "dark") as "dark" | "light" | "hcDark" | "hcLight";
+      const themeType: ColorSchemeType = getThemeType(themePathListByLabel[themeLabel]?.uiTheme ?? "");
 
       const colors = setting.colors;
       const setColor = (colorKey: keyof SvgColors) => {
@@ -70,4 +76,13 @@ const getThemeSettingObj = async (themeFilePath: string): Promise<ThemeConfig | 
   }
 
   return content;
+};
+
+const getThemeType = (uiTheme: string): ColorSchemeType => {
+  switch (uiTheme) {
+		case 'vs-dark': return ColorScheme.DARK;
+		case 'hc-black': return ColorScheme.HIGH_CONTRAST_DARK;
+		case 'hc-light': return ColorScheme.HIGH_CONTRAST_LIGHT;
+		default: return 'light';
+  }
 };

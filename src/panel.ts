@@ -103,7 +103,12 @@ type Message =
   | {
       command: "get-group-color-themes";
       themeDir: string;
-      themePathListByLabel: Record<ThemeInfo["label"], ThemeInfo["path"]>;
+      themePathListByLabel: {
+        [label: ThemeInfo["label"]]: {
+          path: ThemeInfo["path"],
+          uiTheme: ThemeInfo["uiTheme"],
+        }
+      };
     }
   | {
       command: "get-current-theme-label";

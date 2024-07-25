@@ -16,8 +16,8 @@ const VscodeSvg: React.FC<Props> = ({ colors }) => {
 	}
 
 	const tabBgStyle = {
-		fill: colors?.["editorGroupHeader.tabsBackground"],
-		stroke: colors?.["editorGroupHeader.tabsBorder"],
+		fill: colors?.["editorGroupHeader.tabsBackground"] ?? "#0000",
+		stroke: colors?.["editorGroupHeader.tabsBorder"] ?? "#0000",
 	}
 
 	const tab1Style = {

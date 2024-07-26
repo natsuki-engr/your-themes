@@ -1,7 +1,7 @@
 import React from "react";
 import { SvgColors } from "../../../src/types/svgColors";
 
-export interface Props {
+interface Props {
 	colors: SvgColors | null
 }
 

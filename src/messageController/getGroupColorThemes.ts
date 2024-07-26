@@ -41,9 +41,9 @@ export const getGroupColorThemes = async (
         }
       };
 
-      overrideUndefinedColors(themeColors);
-
       ColorOptions.forEach((key) => setColor(key));
+
+      overrideUndefinedColors(themeColors);
 
       colorThemesByLabel[themeLabel] = themeColors;
     } catch (error) {

@@ -24,7 +24,6 @@ function App() {
       const msgData = e.data;
       const command = "command" in msgData ? msgData.command : "";
       let json: unknown;
-      console.log('msgData', msgData)
       switch (command) {
         case "resp-of-get-theme-list":
           json = "json" in msgData ? msgData.json : [];

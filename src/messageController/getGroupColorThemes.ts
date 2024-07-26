@@ -41,6 +41,8 @@ export const getGroupColorThemes = async (
         }
       };
 
+      overrideUndefinedColors(themeColors);
+
       ColorOptions.forEach((key) => setColor(key));
 
       colorThemesByLabel[themeLabel] = themeColors;
@@ -74,7 +76,6 @@ const getThemeSettingObj = async (themeFilePath: string): Promise<ThemeConfig | 
       }
       break;
   }
-
   return content;
 };
 
@@ -84,5 +85,19 @@ const getThemeType = (uiTheme: string): ColorSchemeType => {
 		case 'hc-black': return ColorScheme.HIGH_CONTRAST_DARK;
 		case 'hc-light': return ColorScheme.HIGH_CONTRAST_LIGHT;
 		default: return 'light';
+  }
+};
+
+const overrideUndefinedColors = (themeColors: SvgColors): void => {
+  const colors: Array<[(typeof ColorOptions)[number], (typeof ColorOptions)[number]]> = [
+    ["sideBar.border", "contrastBorder"],
+    ["activityBar.border", "contrastBorder"],
+    ["statusBar.border", "contrastBorder"],
+  ];
+
+  for(const [fromKey, toKey] of colors) {
+    if (themeColors[fromKey] === undefined && themeColors[toKey] !== undefined) {
+      themeColors[fromKey] = themeColors[toKey];
+    }
   }
 };

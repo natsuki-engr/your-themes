@@ -36,7 +36,7 @@ const VscodeSvg: React.FC<Props> = ({ colors }) => {
 	}
 
 	const activeTab1Style = {
-		fill: colors?.["tab.inactiveBackground"],
+		fill: colors?.["tab.activeBackground"],
 		stroke: colors?.["focusBorder"],
 	}
 

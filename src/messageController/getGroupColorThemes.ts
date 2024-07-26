@@ -48,7 +48,7 @@ export const getGroupColorThemes = async (
       colorThemesByLabel[themeLabel] = themeColors;
     } catch (error) {
       if (error instanceof Error) {
-        Logger.log(`can't read theme file [${themeDir}]: ` + error.message);
+        Logger.log(`can't read theme file [${themeDir}]: ${error.message}\n${error.stack}`);
       }
     }
   }

@@ -20,10 +20,10 @@ export const defaultColors: Record<
   }
 > = {
   "tab.activeBackground": {
-    dark: "#F3F3F3",
-    light: "#FFFFFF",
-    hcDark: "#000000",
-    hcLight: "#252526",
+    light: "#ffffff",
+    dark: "#1E1E1E",
+    hcDark: black,
+    hcLight: white,
   },
   "tab.activeForeground": {
     dark: white,

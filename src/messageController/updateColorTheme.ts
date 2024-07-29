@@ -13,7 +13,7 @@ export const updateColorTheme = async (label: string, target: string) => {
       configTarget = ConfigurationTarget.Workspace;
       break;
     case "folder":
-      configTarget = ConfigurationTarget.Workspace;
+      configTarget = ConfigurationTarget.WorkspaceFolder;
       break;
     default:
       configTarget = null;

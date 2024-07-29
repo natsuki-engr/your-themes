@@ -45,12 +45,12 @@ function App() {
   return (
     <>
       <TargetTabs />
-      <div className="bg-vscode-editor-background w-full p-8">
+      <div className="bg-vscode-editor-background min-h-screen w-full p-8">
 
         {themeLists ? (
           <ThemeList themeGroups={themeLists}></ThemeList>
         ) : (
-          <span>hey!</span>
+          <></>
         )}
       </div>
     </>

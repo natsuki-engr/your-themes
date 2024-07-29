@@ -17,7 +17,6 @@ const ThemeCard: React.FC<Props> = ({ label, colors, currentLabel, onSelect }) =
 
   return (
     <label className="relative mb-6 w-80 shrink-0 cursor-pointer rounded border-2 border-solid border-transparent bg-opacity-20 p-4 hover:bg-[rgba(128,128,128,0.15)] has-[:checked]:bg-[rgba(128,128,128,0.15)] [&:has(input[type='radio']:checked)]:border-white">
-      <span>current: {currentLabel}</span>
       <input
         onChange={() => changeHandler(label)}
         name="theme_selector"

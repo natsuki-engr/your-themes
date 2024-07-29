@@ -75,7 +75,7 @@ export const isSvgColors = (data: unknown): data is SvgColors => {
     let value: any;
     if (
       ColorOptions.includes(key as (typeof ColorOptions)[number]) &&
-      (typeof (value = (data as Record<string, unknown>)[key]) === "string" || value === null)
+      (typeof (value = (data as Record<string, unknown>)[key]) === "string" || value !== null)
     ) {
       continue;
     } else {

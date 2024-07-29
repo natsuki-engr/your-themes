@@ -24,7 +24,21 @@ export const ColorOptions = [
   "tab.border",
 ] as const;
 
-export type SvgColors = Record<(typeof ColorOptions)[number], string>;
+export const TokenColorOptions = [
+  "function",
+  "keyword",
+  "support.constant",
+  "constant.numeric",
+  "string",
+  "entity.name.function",
+  "editorBracketHighlight.foreground1",
+  "editorBracketHighlight.foreground2",
+];
+
+export type SvgColors = {
+  colors: Record<(typeof ColorOptions)[number], string>;
+  tokenColors: Record<(typeof TokenColorOptions)[number], string>;
+};
 
 // export interface SvgColors extends Record<(typeof ColorOptions)[number], string> {
 //   "tab.activeBackground": string; // "#00F"
@@ -46,11 +60,17 @@ export type SvgColors = Record<(typeof ColorOptions)[number], string>;
 // }
 
 export const isSvgColors = (data: unknown): data is SvgColors => {
-  if (typeof data !== "object" || data === null) {
+  if (
+    typeof data !== "object" ||
+    data === null ||
+    !("colors" in data) ||
+    typeof data.colors !== "object" ||
+    data.colors === null
+  ) {
     return false;
   }
 
-  for (const key in data) {
+  for (const key in data.colors) {
     let value: any;
     if (
       ColorOptions.includes(key as (typeof ColorOptions)[number]) &&
@@ -58,7 +78,7 @@ export const isSvgColors = (data: unknown): data is SvgColors => {
     ) {
       continue;
     } else {
-  return false;
+      return false;
     }
   }
 

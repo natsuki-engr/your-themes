@@ -10,6 +10,7 @@ import { isTmTheme, TmTheme } from "../types/tmTheme";
 import { isThemeConfig, ThemeConfig } from "../types/themeConfig";
 import { parseTmTheme } from "../services/tmThemeService";
 import { ColorScheme, ColorSchemeType } from "../types/colorThemeSetting";
+import { setTokenColors } from "../services/setTokenColors";
 
 export const getGroupColorThemes = async (
   themeDir: string,
@@ -29,19 +30,26 @@ export const getGroupColorThemes = async (
         continue;
       }
 
-      const themeColors: SvgColors = {} as SvgColors;
+      const themeColors: SvgColors = {
+        colors: {},
+        tokenColors: {},
+      } as SvgColors;
+
+      themeColors.tokenColors = {};
 
       const themeType: ColorSchemeType = getThemeType(themePathListByLabel[themeLabel]?.uiTheme ?? "");
 
       const colors = setting.colors;
-      const setColor = (colorKey: keyof SvgColors) => {
+      const tokenColors = setting.tokenColors;
+      const setColor = (colorKey: keyof SvgColors["colors"]) => {
         const colorCode = colors[colorKey] ?? defaultColors[colorKey][themeType];
         if (typeof colorCode === "string") {
-          themeColors[colorKey] = colorCode;
+          themeColors.colors[colorKey] = colorCode;
         }
       };
 
       ColorOptions.forEach((key) => setColor(key));
+      themeColors.tokenColors = setTokenColors(tokenColors);
 
       overrideUndefinedColors(themeColors);
 
@@ -96,8 +104,8 @@ const overrideUndefinedColors = (themeColors: SvgColors): void => {
   ];
 
   for(const [fromKey, toKey] of colors) {
-    if (themeColors[fromKey] === undefined && themeColors[toKey] !== undefined) {
-      themeColors[fromKey] = themeColors[toKey];
+    if (themeColors.colors[fromKey] === undefined && themeColors.colors[toKey] !== undefined) {
+      themeColors.colors[fromKey] = themeColors.colors[toKey];
     }
   }
 };

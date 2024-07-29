@@ -15,6 +15,7 @@ export const parseTmTheme = (content: TmTheme): ThemeConfig | null => {
   const config: ThemeConfig = {
     colors: {},
     type: "dark",
+    tokenColors: [],
   };
 
   const settings = content.settings[0]?.settings ?? {};

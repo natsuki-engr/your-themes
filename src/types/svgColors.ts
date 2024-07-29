@@ -7,6 +7,7 @@ export const ColorOptions = [
   "sideBar.background",
   "sideBar.border",
   "editor.background",
+  "editor.foreground",
   "activityBar.background",
   "activityBar.foreground",
   "activityBar.border",

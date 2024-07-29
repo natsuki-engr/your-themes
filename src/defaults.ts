@@ -19,6 +19,12 @@ export const defaultColors: Record<
     hcLight: string | null;
   }
 > = {
+  "editor.foreground": {
+    light: "#333333",
+    dark: "#BBBBBB",
+    hcDark: white,
+    hcLight: foreground.hcLight,
+  },
   "tab.activeBackground": {
     light: "#ffffff",
     dark: "#1E1E1E",

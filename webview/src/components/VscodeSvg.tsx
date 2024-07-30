@@ -76,8 +76,8 @@ const VscodeSvg: React.FC<Props> = ({ colors, tokenColors }) => {
     7: [tokenColors?.["editor.foreground"], tokenColors?.["entity.name.function"], tokenColors?.["string"]],
     8: [tokenColors?.["keyword"]],
     9: [tokenColors?.["editor.foreground"], tokenColors?.["entity.name.function"], tokenColors?.["editor.foreground"]],
-    10: [tokenColors?.["editorBracketHighlight.foreground2"]],
-    11: [tokenColors?.["editorBracketHighlight.foreground1"]],
+    10: [colors?.["editorBracketHighlight.foreground2"]],
+    11: [colors?.["editorBracketHighlight.foreground1"]],
   } as const
 
   return (

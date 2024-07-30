@@ -163,4 +163,22 @@ export const defaultColors: Record<
     hcDark: contrastBorder.hcDark,
     hcLight: contrastBorder.hcLight,
   },
+  "editorBracketHighlight.foreground1": {
+    dark: "#FFD700",
+    light: "#0431FAFF",
+    hcDark: "#FFD700",
+    hcLight: "#0431FAFF",
+  },
+  "editorBracketHighlight.foreground2": {
+    dark: "#DA70D6",
+    light: "#319331FF",
+    hcDark: "#DA70D6",
+    hcLight: "#319331FF",
+  },
+  "editorBracketHighlight.foreground3": {
+    dark: "#179FFF",
+    light: "#7B3814FF",
+    hcDark: "#87CEFA",
+    hcLight: "#7B3814FF",
+  },
 };

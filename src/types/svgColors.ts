@@ -23,6 +23,9 @@ export const ColorOptions = [
   "editorGroupHeader.tabsBorder",
   "editorGroupHeader.tabsBackground",
   "tab.border",
+  "editorBracketHighlight.foreground1",
+  "editorBracketHighlight.foreground2",
+  "editorBracketHighlight.foreground3",
 ] as const;
 
 export const TokenColorOptions = [
@@ -32,8 +35,6 @@ export const TokenColorOptions = [
   "constant.numeric",
   "string",
   "entity.name.function",
-  "editorBracketHighlight.foreground1",
-  "editorBracketHighlight.foreground2",
 ];
 
 export type SvgColors = {

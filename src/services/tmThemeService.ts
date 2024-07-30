@@ -21,7 +21,7 @@ export const parseTmTheme = (content: TmTheme): ThemeConfig | null => {
   const settings = content.settings[0]?.settings ?? {};
   for (const [fromKey, color] of Object.entries(mapping)) {
     if (fromKey in settings && mapping[fromKey] !== undefined) {
-      const toKey = mapping[fromKey];
+      const toKey = mapping[fromKey] as typeof mapping[keyof typeof mapping];
       config.colors[toKey] = settings[fromKey] ?? null;
     }
   }

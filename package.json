@@ -3,6 +3,11 @@
   "displayName": "theme-view",
   "description": "",
   "version": "0.0.1",
+  "publisher": "Natsuki",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/natsuki-engr/theme-viewer"
+  },
   "engines": {
     "vscode": "^1.89.0"
   },

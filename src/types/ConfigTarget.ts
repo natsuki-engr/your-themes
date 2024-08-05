@@ -4,4 +4,4 @@ export const ConfigTarget = {
   Folder: "folder",
 } as const;
 
-export type ConfigTargetValueType = typeof ConfigTarget[keyof typeof ConfigTarget];
+export type ConfigTargetValueType = typeof ConfigTarget.User | typeof ConfigTarget.Workspace;

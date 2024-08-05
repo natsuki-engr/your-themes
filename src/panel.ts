@@ -109,7 +109,7 @@ type Message =
   | {
     command: "update-color";
     label: string;
-    target: string;
+    target: ConfigTargetValueType;
   }
   | {
       command: "get-group-color-themes";

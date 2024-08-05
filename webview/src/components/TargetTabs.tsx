@@ -42,19 +42,6 @@ const TargetTabs: React.FC = () => {
           />
         </label>
       </li>
-      <li className="block">
-        <label className="block cursor-pointer border-2 border-solid border-transparent p-3 has-[:checked]:border-b-white">
-          Folder
-          <input
-            onChange={changeHandler}
-            className="pointer-events-none absolute opacity-0"
-            type="radio"
-            value={ConfigTarget.Folder}
-            checked={target === ConfigTarget.Folder}
-            name="config_target"
-          />
-        </label>
-      </li>
     </ul>
   );
 };

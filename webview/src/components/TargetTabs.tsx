@@ -28,7 +28,7 @@ const TargetTabs: React.FC = () => {
   return (
     <ul className="bg-vscode-editor-background sideBarSectionHeader-border sticky top-0 z-10 flex h-12 w-full items-end pe-2 ps-2 pt-2">
       <li className="block">
-        <label className="block cursor-pointer border-2 border-solid border-transparent p-3 has-[:checked]:border-b-[var(--vscode-settings-sashBorder)]">
+        <label className="block cursor-pointer border-2 border-solid border-transparent p-3 has-[:checked]:border-b-[var(--vscode-activityBar-activeBorder)]">
           User
           <input
             onChange={() => changeHandler(ConfigTarget.User)}
@@ -42,7 +42,7 @@ const TargetTabs: React.FC = () => {
       </li>
       {workspaceFolders.length ? (
         <li className="block">
-          <label className="block cursor-pointer border-2 border-solid border-transparent p-3 has-[:checked]:border-b-white">
+          <label className="block cursor-pointer border-2 border-solid border-transparent p-3 has-[:checked]:border-b-[var(--vscode-activityBar-activeBorder)]">
             Workspace
             <input
               onChange={() => changeHandler(ConfigTarget.Workspace)}

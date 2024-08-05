@@ -19,12 +19,14 @@ export const parseTmTheme = (content: TmTheme): ThemeConfig | null => {
   };
 
   const settings = content.settings[0]?.settings ?? {};
+  const colors: Record<string, string | null> = {};
   for (const [fromKey, color] of Object.entries(mapping)) {
     if (fromKey in settings && mapping[fromKey] !== undefined) {
       const toKey = mapping[fromKey] as typeof mapping[keyof typeof mapping];
-      config.colors[toKey] = settings[fromKey] ?? null;
+      colors[toKey] = settings[fromKey] ?? null;
     }
   }
+  config.colors = colors;
 
   return config;
 };

@@ -16,9 +16,9 @@ export const getGroupColorThemes = async (
   themeDir: string,
   themePathListByLabel: {
     [label: ThemeInfo["label"]]: {
-      path: ThemeInfo["path"],
-      uiTheme: ThemeInfo["uiTheme"],
-    }
+      path: ThemeInfo["path"];
+      uiTheme: ThemeInfo["uiTheme"];
+    };
   }
 ): Promise<Record<ThemeInfo["label"], SvgColors>> => {
   const colorThemesByLabel: Record<ThemeInfo["label"], SvgColors> = {};
@@ -38,6 +38,10 @@ export const getGroupColorThemes = async (
       themeColors.tokenColors = {};
 
       const themeType: ColorSchemeType = getThemeType(themePathListByLabel[themeLabel]?.uiTheme ?? "");
+
+      if (setting.colors === undefined) {
+        setting.colors = {};
+      }
 
       const colors = setting.colors;
       const tokenColors = setting.tokenColors;
@@ -89,10 +93,14 @@ const getThemeSettingObj = async (themeFilePath: string): Promise<ThemeConfig | 
 
 const getThemeType = (uiTheme: string): ColorSchemeType => {
   switch (uiTheme) {
-		case 'vs-dark': return ColorScheme.DARK;
-		case 'hc-black': return ColorScheme.HIGH_CONTRAST_DARK;
-		case 'hc-light': return ColorScheme.HIGH_CONTRAST_LIGHT;
-		default: return 'light';
+    case "vs-dark":
+      return ColorScheme.DARK;
+    case "hc-black":
+      return ColorScheme.HIGH_CONTRAST_DARK;
+    case "hc-light":
+      return ColorScheme.HIGH_CONTRAST_LIGHT;
+    default:
+      return "light";
   }
 };
 
@@ -103,7 +111,7 @@ const overrideUndefinedColors = (themeColors: SvgColors): void => {
     ["statusBar.border", "contrastBorder"],
   ];
 
-  for(const [fromKey, toKey] of colors) {
+  for (const [fromKey, toKey] of colors) {
     if (themeColors.colors[fromKey] === undefined && themeColors.colors[toKey] !== undefined) {
       themeColors.colors[fromKey] = themeColors.colors[toKey];
     }

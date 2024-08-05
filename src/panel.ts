@@ -6,6 +6,7 @@ import { getGroupColorThemes } from "./messageController/getGroupColorThemes";
 import { ThemeInfo } from "./types/themeInfo";
 import { getCurrentTheme } from "./messageController/getCurrentTheme";
 import { ConfigTargetValueType } from "./types/ConfigTarget";
+import { getConfigTargets } from "./messageController/getConfigTargets";
 
 export const createNewPanel = (
   context: vscode.ExtensionContext
@@ -86,6 +87,13 @@ const registerCommands = async (panel: vscode.WebviewPanel) => {
             json: { themeLabel: currentTheme },
           });
           return;
+        case "get-config-targets":
+          const targets = getConfigTargets();
+          response({
+            panel,
+            command: "resp-of-get-config-targets",
+            json: { targets },
+          });
       }
     } catch (error) {
       if(error instanceof Error) {
@@ -124,4 +132,6 @@ type Message =
   | {
       command: "get-current-theme-label";
       target: ConfigTargetValueType
+  } | {
+    command: "get-config-targets";
   };

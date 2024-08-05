@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { mutate } from "swr";
 import { ConfigTarget, ConfigTargetValueType } from "../../../src/types/ConfigTarget";
 import { useStaticSWR } from "../stores/useStaticSWR";
+import MessageListener from "../controllers/messageListener";
+import { getConfigTargets } from "../controllers/getConfigTargets";
 
 const TargetTabs: React.FC = () => {
   const { data: target, mutate: setTarget } = useStaticSWR<ConfigTargetValueType>("config-target", ConfigTarget.User);
+  const [workspaceFolders, setWorkspaceFolders] = useState<Array<{ name: string; index: number }>>([]);
 
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (Object.values(ConfigTarget).some((v) => v === value)) {
-      setTarget(value as ConfigTargetValueType);
-    }
+  useEffect(() => {
+    const messageListener = new MessageListener();
+    getConfigTargets(messageListener).then((targets) => {
+      setWorkspaceFolders(targets);
+    });
+
+    return () => {
+      messageListener.unsubscribe();
+    };
+  }, []);
+
+  const changeHandler = (target: ConfigTargetValueType) => {
+    setTarget(target);
     mutate((key) => key === "get-current-theme-label", undefined, true);
   };
 
@@ -20,7 +31,7 @@ const TargetTabs: React.FC = () => {
         <label className="block cursor-pointer border-2 border-solid border-transparent p-3 has-[:checked]:border-b-[var(--vscode-settings-sashBorder)]">
           User
           <input
-            onChange={changeHandler}
+            onChange={() => changeHandler(ConfigTarget.User)}
             className="pointer-events-none absolute opacity-0"
             type="radio"
             value={ConfigTarget.User}
@@ -29,19 +40,23 @@ const TargetTabs: React.FC = () => {
           />
         </label>
       </li>
-      <li className="block">
-        <label className="block cursor-pointer border-2 border-solid border-transparent p-3 has-[:checked]:border-b-white">
-          Workspace
-          <input
-            onChange={changeHandler}
-            className="pointer-events-none absolute opacity-0"
-            type="radio"
-            value={ConfigTarget.Workspace}
-            checked={target === ConfigTarget.Workspace}
-            name="config_target"
-          />
-        </label>
-      </li>
+      {workspaceFolders.length ? (
+        <li className="block">
+          <label className="block cursor-pointer border-2 border-solid border-transparent p-3 has-[:checked]:border-b-white">
+            Workspace
+            <input
+              onChange={() => changeHandler(ConfigTarget.Workspace)}
+              className="pointer-events-none absolute opacity-0"
+              type="radio"
+              value={ConfigTarget.Workspace}
+              checked={target === ConfigTarget.Workspace}
+              name="config_target"
+            />
+          </label>
+        </li>
+      ) : (
+        <></>
+      )}
     </ul>
   );
 };

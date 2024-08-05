@@ -56,28 +56,32 @@ const registerCommands = async (panel: vscode.WebviewPanel) => {
       switch (msg.command) {
         case "get-theme-list":
           const themes = getThemeInfoList();
-          panel.webview.postMessage({
+          response({
+            panel,
             command: "resp-of-get-theme-list",
             json: themes,
           });
           return;
         case "update-color":
           await updateColorTheme(msg.label, msg.target);
-          panel.webview.postMessage({
+          response({
+            panel,
             command: "resp-of-update-color",
             json: {},
           });
           return;
         case "get-group-color-themes":
           const themesByLabel = await getGroupColorThemes(msg.themeDir, msg.themePathListByLabel);
-          panel.webview.postMessage({
+          response({
+            panel,
             command: "resp-of-get-group-color-themes",
             json: { themes: themesByLabel, groupDir: msg.themeDir },
           });
           return;
         case "get-current-theme-label":
           const currentTheme = getCurrentTheme(msg.target);
-          panel.webview.postMessage({
+          response({
+            panel,
             command: "resp-of-get-current-theme-label",
             json: { themeLabel: currentTheme },
           });
@@ -88,6 +92,13 @@ const registerCommands = async (panel: vscode.WebviewPanel) => {
         Logger.log("error" + JSON.stringify(error));
       }
     }
+  });
+};
+
+const response = ({panel, command, json}: {panel: vscode.WebviewPanel, command: string, json: any}) => {
+  panel.webview.postMessage({
+    command,
+    json,
   });
 };
 

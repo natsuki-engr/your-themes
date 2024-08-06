@@ -33,7 +33,8 @@
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "vscode-test",
-    "package": "npm run check-types && node esbuild.js --production && vsce package"
+    "package": "npm run check-types && node esbuild.js --production && vsce package",
+    "prepare": "husky init"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.6",
@@ -47,11 +48,23 @@
     "@vscode/test-electron": "^2.3.9",
     "esbuild": "^0.23.0",
     "eslint": "^8.57.0",
+    "husky": "^9.1.4",
+    "lint-staged": "^15.2.8",
     "typescript": "^5.4.5",
     "vscode-webview": "^1.0.1-beta.1"
   },
   "dependencies": {
     "json5": "^2.2.3",
     "plist": "^3.1.0"
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "webview/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix --config webview/.eslintrc.cjs",
+      "prettier --write"
+    ]
   }
 }

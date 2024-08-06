@@ -1,5 +1,5 @@
 export interface ThemeConfig {
-  colors?: Record<string, string | null>;
+  colors?: Record<string, unknown>;
   type?: string;
   tokenColors: Array<{
     scope: string | string[];
@@ -11,16 +11,18 @@ export interface ThemeConfig {
 }
 
 export const isThemeConfig = (content: unknown): content is ThemeConfig => {
-  if (typeof content !== "object" || content === null || !("tokenColors" in content)) {
+  if (
+    typeof content !== "object" ||
+    content === null ||
+    !("tokenColors" in content)
+  ) {
     return false;
   }
 
   // color is optional
   if (
     "colors" in content &&
-    (typeof content.colors !== "object" ||
-      content.colors === null ||
-      !Object.values(content.colors).every((v) => typeof v === "string" || v === null))
+    (typeof content.colors !== "object" || content.colors === null)
   ) {
     return false;
   }

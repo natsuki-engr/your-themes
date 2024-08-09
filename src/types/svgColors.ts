@@ -76,7 +76,8 @@ export const isSvgColors = (data: unknown): data is SvgColors => {
     let value: any;
     if (
       ColorOptions.includes(key as (typeof ColorOptions)[number]) &&
-      (typeof (value = (data as Record<string, unknown>)[key]) === "string" || value !== null)
+      (typeof (value = (data as Record<string, unknown>)[key]) === "string" ||
+        value !== null)
     ) {
       continue;
     } else {
@@ -87,13 +88,18 @@ export const isSvgColors = (data: unknown): data is SvgColors => {
   return true;
 };
 
-export const isPartialSvgColors = (data: unknown): data is Partial<SvgColors> => {
+export const isPartialSvgColors = (
+  data: unknown,
+): data is Partial<SvgColors> => {
   if (typeof data !== "object" || data === null) {
     return false;
   }
 
   for (const key in ColorOptions) {
-    if (key in data && typeof (data as Record<string, unknown>)[key] === "string") {
+    if (
+      key in data &&
+      typeof (data as Record<string, unknown>)[key] === "string"
+    ) {
       continue;
     } else {
       return false;

@@ -23,7 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
     "theme-view.viewThemes",
     async (_editBuilder, _editor, _selection, _dex) => {
       createNewPanel(context);
-    }
+    },
   );
 
   context.subscriptions.push(disposable);

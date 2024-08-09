@@ -1,15 +1,15 @@
 import * as vscode from "vscode";
-import { getThemeInfoList } from "./theme-extension";
 import Logger from "./logger";
-import { updateColorTheme } from "./messageController/updateColorTheme";
-import { getGroupColorThemes } from "./messageController/getGroupColorThemes";
-import { ThemeInfo } from "./types/themeInfo";
-import { getCurrentTheme } from "./messageController/getCurrentTheme";
-import { ConfigTargetValueType } from "./types/ConfigTarget";
 import { getConfigTargets } from "./messageController/getConfigTargets";
+import { getCurrentTheme } from "./messageController/getCurrentTheme";
+import { getGroupColorThemes } from "./messageController/getGroupColorThemes";
+import { updateColorTheme } from "./messageController/updateColorTheme";
+import { getThemeInfoList } from "./theme-extension";
+import { ConfigTargetValueType } from "./types/ConfigTarget";
+import { ThemeInfo } from "./types/themeInfo";
 
 export const createNewPanel = (
-  context: vscode.ExtensionContext
+  context: vscode.ExtensionContext,
 ): vscode.WebviewPanel => {
   const panel = vscode.window.createWebviewPanel(
     "viewThemes",
@@ -19,17 +19,17 @@ export const createNewPanel = (
     },
     {
       enableScripts: true,
-    }
+    },
   );
   const scriptPath = panel.webview.asWebviewUri(
-    vscode.Uri.joinPath(context.extensionUri, "./webview/dist/", "index.js")
+    vscode.Uri.joinPath(context.extensionUri, "./webview/dist/", "index.js"),
   );
   const cssStyle = panel.webview.asWebviewUri(
     vscode.Uri.joinPath(
       context.extensionUri,
       "./webview/dist/assets/",
-      "index.css"
-    )
+      "index.css",
+    ),
   );
 
   registerCommands(panel);
@@ -72,7 +72,10 @@ const registerCommands = async (panel: vscode.WebviewPanel) => {
           });
           return;
         case "get-group-color-themes":
-          const themesByLabel = await getGroupColorThemes(msg.themeDir, msg.themePathListByLabel);
+          const themesByLabel = await getGroupColorThemes(
+            msg.themeDir,
+            msg.themePathListByLabel,
+          );
           response({
             panel,
             command: "resp-of-get-group-color-themes",
@@ -96,14 +99,22 @@ const registerCommands = async (panel: vscode.WebviewPanel) => {
           });
       }
     } catch (error) {
-      if(error instanceof Error) {
+      if (error instanceof Error) {
         Logger.log("error" + JSON.stringify(error));
       }
     }
   });
 };
 
-const response = ({panel, command, json}: {panel: vscode.WebviewPanel, command: string, json: any}) => {
+const response = ({
+  panel,
+  command,
+  json,
+}: {
+  panel: vscode.WebviewPanel;
+  command: string;
+  json: any;
+}) => {
   panel.webview.postMessage({
     command,
     json,
@@ -112,26 +123,27 @@ const response = ({panel, command, json}: {panel: vscode.WebviewPanel, command: 
 
 type Message =
   | {
-    command: "get-theme-list";
-  }
+      command: "get-theme-list";
+    }
   | {
-    command: "update-color";
-    label: string;
-    target: ConfigTargetValueType;
-  }
+      command: "update-color";
+      label: string;
+      target: ConfigTargetValueType;
+    }
   | {
       command: "get-group-color-themes";
       themeDir: string;
       themePathListByLabel: {
         [label: ThemeInfo["label"]]: {
-          path: ThemeInfo["path"],
-          uiTheme: ThemeInfo["uiTheme"],
-        }
+          path: ThemeInfo["path"];
+          uiTheme: ThemeInfo["uiTheme"];
+        };
       };
     }
   | {
       command: "get-current-theme-label";
-      target: ConfigTargetValueType
-  } | {
-    command: "get-config-targets";
-  };
+      target: ConfigTargetValueType;
+    }
+  | {
+      command: "get-config-targets";
+    };

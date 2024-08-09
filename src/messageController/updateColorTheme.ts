@@ -1,8 +1,14 @@
-import { workspace, ConfigurationTarget } from "vscode";
+import { ConfigurationTarget, workspace } from "vscode";
 import { ConfigTargetValueType } from "../types/ConfigTarget";
 
-export const updateColorTheme = async (label: string, target: ConfigTargetValueType) => {
-  let configTarget: ConfigurationTarget.Global | ConfigurationTarget.Workspace | null;
+export const updateColorTheme = async (
+  label: string,
+  target: ConfigTargetValueType,
+) => {
+  let configTarget:
+    | ConfigurationTarget.Global
+    | ConfigurationTarget.Workspace
+    | null;
 
   switch (target) {
     case "user":
@@ -19,5 +25,7 @@ export const updateColorTheme = async (label: string, target: ConfigTargetValueT
     throw new Error();
   }
 
-  await workspace.getConfiguration().update("workbench.colorTheme", label, configTarget);
+  await workspace
+    .getConfiguration()
+    .update("workbench.colorTheme", label, configTarget);
 };

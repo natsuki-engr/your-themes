@@ -22,7 +22,7 @@ export const parseTmTheme = (content: TmTheme): ThemeConfig | null => {
   const colors: Record<string, string | null> = {};
   for (const [fromKey, color] of Object.entries(mapping)) {
     if (fromKey in settings && mapping[fromKey] !== undefined) {
-      const toKey = mapping[fromKey] as typeof mapping[keyof typeof mapping];
+      const toKey = mapping[fromKey] as (typeof mapping)[keyof typeof mapping];
       colors[toKey] = settings[fromKey] ?? null;
     }
   }

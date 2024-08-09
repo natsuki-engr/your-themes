@@ -32,6 +32,7 @@
     "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
+    "format": "prettier --write ./src",
     "test": "vscode-test",
     "package": "npm run check-types && node esbuild.js --production && vsce package",
     "prepare": "husky"

@@ -11,10 +11,10 @@ export const isColorThemeSetting = (data: any): data is ColorThemeSetting => {
 };
 
 export const ColorScheme = {
-	DARK: 'dark',
-	LIGHT: 'light',
-	HIGH_CONTRAST_DARK: 'hcDark',
-	HIGH_CONTRAST_LIGHT: 'hcLight'
+  DARK: "dark",
+  LIGHT: "light",
+  HIGH_CONTRAST_DARK: "hcDark",
+  HIGH_CONTRAST_LIGHT: "hcLight",
 } as const;
 
-export type ColorSchemeType = typeof ColorScheme[keyof typeof ColorScheme];
+export type ColorSchemeType = (typeof ColorScheme)[keyof typeof ColorScheme];

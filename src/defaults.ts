@@ -3,9 +3,24 @@ import { ColorOptions } from "./types/svgColors";
 const white = "#FFF";
 const black = "#000";
 
-const contrastBorder = { light: null, dark: null, hcDark: "#6FC3DF", hcLight: "#0F4A85" };
-const foreground = { dark: "#CCCCCC", light: "#616161", hcDark: "#FFFFFF", hcLight: "#292929" };
-const editorForeground = { light: "#333333", dark: "#BBBBBB", hcDark: white, hcLight: foreground.hcLight };
+const contrastBorder = {
+  light: null,
+  dark: null,
+  hcDark: "#6FC3DF",
+  hcLight: "#0F4A85",
+};
+const foreground = {
+  dark: "#CCCCCC",
+  light: "#616161",
+  hcDark: "#FFFFFF",
+  hcLight: "#292929",
+};
+const editorForeground = {
+  light: "#333333",
+  dark: "#BBBBBB",
+  hcDark: white,
+  hcLight: foreground.hcLight,
+};
 
 // Reference
 // https://github.com/microsoft/vscode/blob/22e3447b4b410dcf8426bf70743c5dd4030d6122/src/vs/workbench/common/theme.ts

@@ -1,4 +1,11 @@
-export const tmThemeColorNames = ["background", "caret", "foreground", "invisibles", "lineHighlight", "selection"];
+export const tmThemeColorNames = [
+  "background",
+  "caret",
+  "foreground",
+  "invisibles",
+  "lineHighlight",
+  "selection",
+];
 
 export interface TmTheme {
   name: string;
@@ -8,11 +15,18 @@ export interface TmTheme {
 }
 
 export const isTmTheme = (content: unknown): content is TmTheme => {
-  if (typeof content !== "object" || content === null || !("settings" in content)) {
+  if (
+    typeof content !== "object" ||
+    content === null ||
+    !("settings" in content)
+  ) {
     return false;
   }
 
-  if (!Array.isArray(content.settings) || !("settings" in content.settings[0])) {
+  if (
+    !Array.isArray(content.settings) ||
+    !("settings" in content.settings[0])
+  ) {
     return false;
   }
 

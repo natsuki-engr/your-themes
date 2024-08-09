@@ -1,10 +1,10 @@
-import * as vscode from "vscode";
 import * as fs from "fs";
+import * as vscode from "vscode";
 import {
   ColorThemeSetting,
   isColorThemeSetting,
 } from "./types/colorThemeSetting";
-import { type ThemeGroupInfo, isThemeInfo } from "./types/themeInfo";
+import { isThemeInfo, type ThemeGroupInfo } from "./types/themeInfo";
 
 export const getThemeExtensionList = (): vscode.Extension<any>[] => {
   const extensions = vscode.extensions.all;
@@ -33,7 +33,7 @@ export const getThemeInfoList = (): ThemeGroupInfo[] => {
       id: theme.id,
       themeDir: theme.extensionPath,
       themes: packageJson.contributes.themes.filter((themes: any) =>
-        isThemeInfo(themes)
+        isThemeInfo(themes),
       ),
     });
   }
@@ -42,7 +42,7 @@ export const getThemeInfoList = (): ThemeGroupInfo[] => {
 };
 
 export const getColorSetting = async (
-  filePath: string
+  filePath: string,
 ): Promise<ColorThemeSetting | null> => {
   const file = fs.readFileSync(filePath, "utf-8");
   const json = JSON.parse(file);
@@ -54,7 +54,7 @@ export const getColorSetting = async (
 };
 
 const hasThemesList = (
-  packageJson: any
+  packageJson: any,
 ): packageJson is { contributes: { themes: any } } => {
   return (
     "contributes" in packageJson &&

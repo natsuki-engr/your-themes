@@ -6,7 +6,7 @@ class PostMessage {
   }
 
   send(command: string, params?: object) {
-    this.#vscode.postMessage({ command, ...params});
+    this.#vscode.postMessage({ command, ...params });
   }
 }
 

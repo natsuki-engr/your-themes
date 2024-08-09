@@ -1,30 +1,41 @@
 import ThemeCard from "./ThemeCard";
 
-import { getColorInfo } from "../controllers/getColorInfo";
-import { ThemeGroupInfo, ThemeInfo } from "../../../src/types/themeInfo";
-import { getCurrentThemeLabel, command as getCurrentThemeLabelCommand } from "../controllers/getCurrentThemeLabel";
 import { useEffect, useState } from "react";
-import { SvgColors } from "../../../src/types/svgColors";
-import MessageListener from "../controllers/messageListener";
 import useSWR, { mutate } from "swr";
-import { useStaticSWR } from "../stores/useStaticSWR";
-import { ConfigTarget, ConfigTargetValueType } from "../../../src/types/ConfigTarget";
+import {
+  ConfigTarget,
+  ConfigTargetValueType,
+} from "../../../src/types/ConfigTarget";
+import { SvgColors } from "../../../src/types/svgColors";
+import { ThemeGroupInfo, ThemeInfo } from "../../../src/types/themeInfo";
+import { getColorInfo } from "../controllers/getColorInfo";
+import {
+  getCurrentThemeLabel,
+  command as getCurrentThemeLabelCommand,
+} from "../controllers/getCurrentThemeLabel";
+import MessageListener from "../controllers/messageListener";
 import { updateColorSetting } from "../controllers/updateColorSetting";
+import { useStaticSWR } from "../stores/useStaticSWR";
 
 interface Props {
   group: ThemeGroupInfo;
 }
 
 const ThemeGroupRow: React.FC<Props> = ({ group }) => {
-  const [colorByLabel, setColorByLabel] = useState<Record<string, SvgColors>>({});
+  const [colorByLabel, setColorByLabel] = useState<Record<string, SvgColors>>(
+    {},
+  );
 
-  const { data: target } = useStaticSWR<ConfigTargetValueType>("config-target", ConfigTarget.User);
+  const { data: target } = useStaticSWR<ConfigTargetValueType>(
+    "config-target",
+    ConfigTarget.User,
+  );
 
   const { data: currentThemeLabel, mutate: mutateCurrentThemeLabel } = useSWR(
     [getCurrentThemeLabelCommand, target],
     ([command, target]) => {
       return getCurrentThemeLabel(command, target);
-    }
+    },
   );
 
   const handleThemeSelect = async (label: string) => {
@@ -49,7 +60,11 @@ const ThemeGroupRow: React.FC<Props> = ({ group }) => {
         };
       }
 
-      const groupColors = await getColorInfo(messageListener, group.themeDir, themePathListByLabel);
+      const groupColors = await getColorInfo(
+        messageListener,
+        group.themeDir,
+        themePathListByLabel,
+      );
       setColorByLabel(groupColors);
     };
 

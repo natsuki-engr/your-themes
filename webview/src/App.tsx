@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
-import "./App.css";
-import {
-  type ThemeGroupInfo,
-  isThemeGroupInfo,
-} from "../../src/types/themeInfo";
 import "vscode-webview";
+import {
+  isThemeGroupInfo,
+  type ThemeGroupInfo,
+} from "../../src/types/themeInfo";
+import "./App.css";
+import TargetTabs from "./components/TargetTabs";
 import ThemeList from "./components/ThemeList";
 import { getThemeList } from "./controllers/getThemeList";
-import TargetTabs from "./components/TargetTabs";
 
-document.addEventListener('keyup', (e: KeyboardEvent) => {
-  e.stopPropagation()
-  if(e.ctrlKey && e.key === 'r') {
-    location.reload()
+document.addEventListener("keyup", (e: KeyboardEvent) => {
+  e.stopPropagation();
+  if (e.ctrlKey && e.key === "r") {
+    location.reload();
   }
-})
+});
 
 function App() {
   const [themeLists, setThemeList] = useState<ThemeGroupInfo[]>();
@@ -35,7 +35,7 @@ function App() {
     };
 
     window.addEventListener("message", onMessage);
-    getThemeList()
+    getThemeList();
 
     return () => {
       window.removeEventListener("message", onMessage);
@@ -46,12 +46,7 @@ function App() {
     <>
       <TargetTabs />
       <div className="bg-vscode-editor-background min-h-screen w-full p-8">
-
-        {themeLists ? (
-          <ThemeList themeGroups={themeLists}></ThemeList>
-        ) : (
-          <></>
-        )}
+        {themeLists ? <ThemeList themeGroups={themeLists}></ThemeList> : <></>}
       </div>
     </>
   );

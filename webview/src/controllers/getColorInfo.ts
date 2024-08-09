@@ -1,12 +1,15 @@
-import { ThemeInfo } from "../../../src/types/themeInfo";
-import postMessage from "./postMessage";
-import MessageListener from "./messageListener";
 import { SvgColors, isSvgColors } from "../../../src/types/svgColors";
+import { ThemeInfo } from "../../../src/types/themeInfo";
+import MessageListener from "./messageListener";
+import postMessage from "./postMessage";
 
 export const getColorInfo = async (
   messageListener: MessageListener,
   themeDir: string,
-  themePathListByLabel: Record<ThemeInfo["label"], { path: ThemeInfo["path"]; uiTheme: ThemeInfo["uiTheme"] }>
+  themePathListByLabel: Record<
+    ThemeInfo["label"],
+    { path: ThemeInfo["path"]; uiTheme: ThemeInfo["uiTheme"] }
+  >,
 ): Promise<Record<string, SvgColors>> => {
   return new Promise<Record<string, SvgColors>>((resolve) => {
     messageListener.receive("resp-of-get-group-color-themes", (json) => {
@@ -18,7 +21,10 @@ export const getColorInfo = async (
       }
     });
 
-    postMessage.send("get-group-color-themes", { themeDir, themePathListByLabel });
+    postMessage.send("get-group-color-themes", {
+      themeDir,
+      themePathListByLabel,
+    });
   });
 };
 

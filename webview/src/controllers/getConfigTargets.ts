@@ -32,7 +32,7 @@ const isResponse = (data: unknown): data is Response => {
         "name" in item &&
         typeof item.name === "string" &&
         "index" in item &&
-        typeof item.index === "number"
+        typeof item.index === "number",
     )
   );
 };

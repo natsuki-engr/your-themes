@@ -18,7 +18,7 @@ class MessageListener {
   }
 
   unsubscribe() {
-    if(this.onMessage !== null) {
+    if (this.onMessage !== null) {
       window.removeEventListener("message", this.onMessage);
     }
   }

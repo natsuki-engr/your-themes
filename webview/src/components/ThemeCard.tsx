@@ -1,6 +1,6 @@
 import React from "react";
-import VscodeSvg from "./VscodeSvg";
 import { SvgColors } from "../../../src/types/svgColors";
+import VscodeSvg from "./VscodeSvg";
 
 interface Props {
   id?: string;
@@ -10,7 +10,12 @@ interface Props {
   onSelect: (label: string) => void;
 }
 
-const ThemeCard: React.FC<Props> = ({ label, colors, currentLabel, onSelect }) => {
+const ThemeCard: React.FC<Props> = ({
+  label,
+  colors,
+  currentLabel,
+  onSelect,
+}) => {
   const changeHandler = (label: string) => {
     onSelect(label);
   };
@@ -30,7 +35,10 @@ const ThemeCard: React.FC<Props> = ({ label, colors, currentLabel, onSelect }) =
         {colors === null ? (
           <p>loading...</p>
         ) : (
-          <VscodeSvg colors={colors?.colors} tokenColors={colors?.tokenColors} />
+          <VscodeSvg
+            colors={colors?.colors}
+            tokenColors={colors?.tokenColors}
+          />
         )}
       </div>
     </label>

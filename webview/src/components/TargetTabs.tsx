@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { mutate } from "swr";
-import { ConfigTarget, ConfigTargetValueType } from "../../../src/types/ConfigTarget";
-import { useStaticSWR } from "../stores/useStaticSWR";
-import MessageListener from "../controllers/messageListener";
+import {
+  ConfigTarget,
+  ConfigTargetValueType,
+} from "../../../src/types/ConfigTarget";
 import { getConfigTargets } from "../controllers/getConfigTargets";
+import MessageListener from "../controllers/messageListener";
+import { useStaticSWR } from "../stores/useStaticSWR";
 
 const TargetTabs: React.FC = () => {
-  const { data: target, mutate: setTarget } = useStaticSWR<ConfigTargetValueType>("config-target", ConfigTarget.User);
-  const [workspaceFolders, setWorkspaceFolders] = useState<Array<{ name: string; index: number }>>([]);
+  const { data: target, mutate: setTarget } =
+    useStaticSWR<ConfigTargetValueType>("config-target", ConfigTarget.User);
+  const [workspaceFolders, setWorkspaceFolders] = useState<
+    Array<{ name: string; index: number }>
+  >([]);
 
   useEffect(() => {
     const messageListener = new MessageListener();

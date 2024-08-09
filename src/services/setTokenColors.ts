@@ -1,10 +1,16 @@
 import { SvgColors, TokenColorOptions } from "../types/svgColors";
-import { ThemeConfig } from "../types/themeConfig";
+import { TokenColor } from "../types/themeConfig";
 
-export const setTokenColors = (tokenColorSettings: ThemeConfig["tokenColors"]): SvgColors["tokenColors"] => {
+export const setTokenColors = (
+  tokenColorSettings: Array<TokenColor>,
+): SvgColors["tokenColors"] => {
   const tokenColors: SvgColors["tokenColors"] = {};
 
   for (const { scope: scopes, name, settings } of tokenColorSettings) {
+    if (scopes === undefined) {
+      continue;
+    }
+
     let foreground: string | undefined = settings?.foreground;
     if (foreground === undefined) {
       continue;

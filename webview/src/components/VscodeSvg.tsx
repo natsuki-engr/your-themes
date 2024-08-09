@@ -6,7 +6,7 @@ interface Props {
   tokenColors: SvgColors["tokenColors"];
 }
 
-const VscodeSvg: React.FC<Props> = ({ colors, tokenColors }) => {
+const VscodeSvg: React.FC<Props> = ({ colors }) => {
   const editorStyle = {
     fill: colors?.["editor.background"],
   };
@@ -65,20 +65,20 @@ const VscodeSvg: React.FC<Props> = ({ colors, tokenColors }) => {
     fill: colors?.["activityBar.foreground"],
   };
 
-  const codeFills: { [line: number]: (string | undefined)[] } = {
-    0: [tokenColors?.["function"]],
-    1: [tokenColors?.["keyword"], tokenColors?.["keyword"], tokenColors?.["support.constant"], tokenColors?.["constant.numeric"]],
-    2: [tokenColors?.["keyword"], tokenColors?.["editor.foreground"]],
-    3: [tokenColors?.["editor.foreground"], tokenColors?.["entity.name.function"], tokenColors?.["string"]],
-    4: [tokenColors?.["keyword"], tokenColors?.["keyword"], tokenColors?.["constant.numeric"]],
-    5: [tokenColors?.["editor.foreground"], tokenColors?.["entity.name.function"], tokenColors?.["string"]],
-    6: [tokenColors?.["keyword"], tokenColors?.["keyword"], tokenColors?.["constant.numeric"]],
-    7: [tokenColors?.["editor.foreground"], tokenColors?.["entity.name.function"], tokenColors?.["string"]],
-    8: [tokenColors?.["keyword"]],
-    9: [tokenColors?.["editor.foreground"], tokenColors?.["entity.name.function"], tokenColors?.["editor.foreground"]],
-    10: [colors?.["editorBracketHighlight.foreground2"]],
-    11: [colors?.["editorBracketHighlight.foreground1"]],
-  } as const;
+  // const codeFills: { [line: number]: (string | undefined)[] } = {
+  //   0: [tokenColors?.["function"]],
+  //   1: [tokenColors?.["keyword"], tokenColors?.["keyword"], tokenColors?.["support.constant"], tokenColors?.["constant.numeric"]],
+  //   2: [tokenColors?.["keyword"], tokenColors?.["editor.foreground"]],
+  //   3: [tokenColors?.["editor.foreground"], tokenColors?.["entity.name.function"], tokenColors?.["string"]],
+  //   4: [tokenColors?.["keyword"], tokenColors?.["keyword"], tokenColors?.["constant.numeric"]],
+  //   5: [tokenColors?.["editor.foreground"], tokenColors?.["entity.name.function"], tokenColors?.["string"]],
+  //   6: [tokenColors?.["keyword"], tokenColors?.["keyword"], tokenColors?.["constant.numeric"]],
+  //   7: [tokenColors?.["editor.foreground"], tokenColors?.["entity.name.function"], tokenColors?.["string"]],
+  //   8: [tokenColors?.["keyword"]],
+  //   9: [tokenColors?.["editor.foreground"], tokenColors?.["entity.name.function"], tokenColors?.["editor.foreground"]],
+  //   10: [colors?.["editorBracketHighlight.foreground2"]],
+  //   11: [colors?.["editorBracketHighlight.foreground1"]],
+  // } as const;
 
   return (
     <svg id="_レイヤー_2" data-name="レイヤー 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 961 721">
@@ -124,55 +124,55 @@ const VscodeSvg: React.FC<Props> = ({ colors, tokenColors }) => {
           <path style={tabTextStyle} d="M748.46,109.62c-.62-.15-1.19-.37-1.7-.66-.52-.29-.98-.64-1.38-1.05l1.12-2.22.13-.29.22.13c.04.15.09.32.14.5.05.18.2.4.44.66.38.34.82.61,1.3.8s1.07.29,1.75.29c.56,0,1.03-.09,1.43-.28s.7-.45.92-.79c.21-.33.32-.72.32-1.16,0-.3-.05-.56-.14-.78-.1-.22-.25-.43-.47-.63-.21-.2-.5-.4-.85-.59-.35-.19-.79-.39-1.3-.6-.88-.34-1.65-.71-2.31-1.13-.67-.41-1.18-.89-1.54-1.45-.37-.55-.55-1.21-.55-1.97s.18-1.4.53-1.97.87-1.03,1.54-1.37c.67-.34,1.51-.51,2.49-.51.56,0,1.06.04,1.53.13.46.09.88.22,1.27.4.39.18.73.41,1.04.69.31.28.61.6.88.96l-1.19,1.77-.19.26-.19-.13c-.04-.17-.09-.35-.13-.53s-.17-.4-.38-.66c-.37-.3-.77-.53-1.21-.68s-.88-.23-1.33-.23c-.71,0-1.28.16-1.72.47s-.66.73-.66,1.25c0,.36.09.68.27.97.18.29.5.57.95.84.45.28,1.08.57,1.9.89.96.38,1.74.76,2.33,1.13.59.37,1.02.8,1.29,1.3.27.5.4,1.12.4,1.86,0,.91-.19,1.72-.56,2.41-.38.7-.93,1.23-1.67,1.6-.74.37-1.64.56-2.72.56-.71,0-1.37-.08-1.99-.23Z" />
         </g>
 
-        <g>
-          <g>
-            <rect style={{ fill: codeFills?.[2]?.[0] }} x="341.15" y="252.58" width="38.68" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[2]?.[1] }} x="394.82" y="252.58" width="171.72" height="28" rx="12.5" ry="12.5" />
-          </g>
-          <rect style={{ fill: codeFills?.[8]?.[0] }} x="367.44" y="504.58" width="61.88" height="28" rx="12.5" ry="12.5" />
-          <g>
-            <rect style={{ fill: codeFills?.[4]?.[0] }} x="367.44" y="336.58" width="61.88" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[4]?.[1] }} x="444.32" y="336.58" width="37.13" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[4]?.[2] }} x="496.45" y="336.58" width="165.53" height="28" rx="12.5" ry="12.5" />
-          </g>
-          <g>
-            <rect style={{ fill: codeFills?.[6]?.[0] }} x="367.44" y="420.58" width="61.88" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[6]?.[1] }} x="444.32" y="420.58" width="37.13" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[6]?.[2] }} x="496.45" y="420.58" width="165.53" height="28" rx="12.5" ry="12.5" />
-          </g>
-          <g>
-            <rect style={{ fill: codeFills?.[3]?.[0] }} x="367.44" y="294.58" width="99.01" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[3]?.[1] }} x="481.45" y="294.58" width="43.32" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[3]?.[2] }} x="539.77" y="294.58" width="136.14" height="28" rx="12.5" ry="12.5" />
-          </g>
-          <g>
-            <rect style={{ fill: codeFills?.[5]?.[0] }} x="367.44" y="378.58" width="99.01" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[5]?.[1] }} x="481.45" y="378.58" width="43.32" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[5]?.[2] }} x="539.77" y="378.58" width="136.14" height="28" rx="12.5" ry="12.5" />
-          </g>
-          <rect style={{ fill: codeFills?.[10]?.[0] }} x="330.32" y="588.58" width="99.01" height="28" rx="12.5" ry="12.5" />
-          <rect style={{ fill: codeFills?.[11]?.[0] }} x="330.32" y="630.58" width="99.01" height="28" rx="12.5" ry="12.5" />
-          <g>
-            <rect style={{ fill: codeFills?.[9]?.[0] }} x="367.44" y="546.58" width="99.01" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[9]?.[1] }} x="481.45" y="546.58" width="43.32" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[9]?.[2] }} x="539.77" y="546.58" width="26.3" height="28" rx="12.5" ry="12.5" />
-          </g>
-          <g>
-            <rect style={{ fill: codeFills?.[7]?.[0] }} x="367.44" y="462.58" width="99.01" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[7]?.[1] }} x="481.45" y="462.58" width="43.32" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[7]?.[2] }} x="539.77" y="462.58" width="136.14" height="28" rx="12.5" ry="12.5" />
-          </g>
-          <g>
-            <rect style={{ fill: codeFills?.[1]?.[0] }} x="316.39" y="210.58" width="47.96" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[1]?.[1] }} x="379.35" y="210.58" width="47.96" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[1]?.[2] }} x="442.31" y="210.58" width="81.99" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[1]?.[3] }} x="539.3" y="210.58" width="120.67" height="28" rx="12.5" ry="12.5" />
-            <rect style={{ fill: codeFills?.[1]?.[4] }} x="674.97" y="210.58" width="46.41" height="28" rx="12.5" ry="12.5" />
-          </g>
-          <g>
-            <rect style={{ fill: codeFills?.[0]?.[0] }} x="287" y="168.58" width="111.38" height="28" rx="12.5" ry="12.5" />
-          </g>
-        </g>
+        {/* <g>
+					<g>
+						<rect style={{fill: codeFills?.[2]?.[0]}} x="341.15" y="252.58" width="38.68" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[2]?.[1]}} x="394.82" y="252.58" width="171.72" height="28" rx="12.5" ry="12.5" />
+					</g>
+					<rect style={{fill: codeFills?.[8]?.[0]}} x="367.44" y="504.58" width="61.88" height="28" rx="12.5" ry="12.5" />
+					<g>
+						<rect style={{fill: codeFills?.[4]?.[0]}} x="367.44" y="336.58" width="61.88" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[4]?.[1]}} x="444.32" y="336.58" width="37.13" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[4]?.[2]}} x="496.45" y="336.58" width="165.53" height="28" rx="12.5" ry="12.5" />
+					</g>
+					<g>
+						<rect style={{fill: codeFills?.[6]?.[0]}} x="367.44" y="420.58" width="61.88" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[6]?.[1]}} x="444.32" y="420.58" width="37.13" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[6]?.[2]}} x="496.45" y="420.58" width="165.53" height="28" rx="12.5" ry="12.5" />
+					</g>
+					<g>
+						<rect style={{fill: codeFills?.[3]?.[0]}} x="367.44" y="294.58" width="99.01" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[3]?.[1]}} x="481.45" y="294.58" width="43.32" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[3]?.[2]}} x="539.77" y="294.58" width="136.14" height="28" rx="12.5" ry="12.5" />
+					</g>
+					<g>
+						<rect style={{fill: codeFills?.[5]?.[0]}} x="367.44" y="378.58" width="99.01" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[5]?.[1]}} x="481.45" y="378.58" width="43.32" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[5]?.[2]}} x="539.77" y="378.58" width="136.14" height="28" rx="12.5" ry="12.5" />
+					</g>
+					<rect style={{fill: codeFills?.[10]?.[0]}} x="330.32" y="588.58" width="99.01" height="28" rx="12.5" ry="12.5" />
+					<rect style={{fill: codeFills?.[11]?.[0]}} x="330.32" y="630.58" width="99.01" height="28" rx="12.5" ry="12.5" />
+					<g>
+						<rect style={{fill: codeFills?.[9]?.[0]}} x="367.44" y="546.58" width="99.01" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[9]?.[1]}} x="481.45" y="546.58" width="43.32" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[9]?.[2]}} x="539.77" y="546.58" width="26.3" height="28" rx="12.5" ry="12.5" />
+					</g>
+					<g>
+						<rect style={{fill: codeFills?.[7]?.[0]}} x="367.44" y="462.58" width="99.01" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[7]?.[1]}} x="481.45" y="462.58" width="43.32" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[7]?.[2]}} x="539.77" y="462.58" width="136.14" height="28" rx="12.5" ry="12.5" />
+					</g>
+					<g>
+						<rect style={{fill: codeFills?.[1]?.[0]}} x="316.39" y="210.58" width="47.96" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[1]?.[1]}} x="379.35" y="210.58" width="47.96" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[1]?.[2]}} x="442.31" y="210.58" width="81.99" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[1]?.[3]}} x="539.3" y="210.58" width="120.67" height="28" rx="12.5" ry="12.5" />
+						<rect style={{fill: codeFills?.[1]?.[4]}} x="674.97" y="210.58" width="46.41" height="28" rx="12.5" ry="12.5" />
+					</g>
+					<g>
+						<rect style={{fill: codeFills?.[0]?.[0]}} x="287" y="168.58" width="111.38" height="28" rx="12.5" ry="12.5" />
+					</g>
+				</g> */}
 
         <path style={activityIconStyle} d="M51.52,96.23h-18.17l-3.03,3.03v9.09h-9.09l-3.03,3.03v30.43l3.03,2.89h24.37l2.89-2.89v-9.23h9.49l2.63-2.89v-24.37l-9.09-9.09ZM51.52,100.51l4.81,4.81h-4.81v-4.81ZM45.46,141.67h-24.23v-30.29h9.09v18.32l3.03,2.89h12.12v9.09ZM57.58,129.55h-24.23v-30.29h15.15v9.09h9.09v21.2Z" />
         <path style={activityIconStyle} d="M45.45,170.6c-9.2,0-16.66,7.45-16.67,16.65,0,4.07,1.49,8.01,4.19,11.05l-16.3,18.5,2.26,2.02,16.26-18.42c7.25,5.67,17.72,4.39,23.39-2.86,5.67-7.25,4.39-17.72-2.86-23.39-2.93-2.29-6.55-3.54-10.27-3.54v-.02ZM45.45,200.89c-7.53,0-13.63-6.1-13.63-13.63s6.1-13.63,13.63-13.63,13.63,6.1,13.63,13.63-6.1,13.63-13.63,13.63Z" />

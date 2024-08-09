@@ -20,6 +20,12 @@
       "options": {
         "singleQuote": false
       }
+    },
+    {
+      "files": "*Svg.tsx",
+      "options": {
+        "printWidth": 1000
+      }
     }
   ]
 }

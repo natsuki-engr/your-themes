@@ -31,8 +31,13 @@
     "watch:esbuild": "node esbuild.js --watch",
     "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
     "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
-    "format": "prettier --write ./src",
+    "lint": "eslint src --report-unused-disable-directives --ext ts",
+    "lint:fix": "eslint src --report-unused-disable-directives --ext ts --fix",
+    "lint:webview:fix": "eslint webview/src --report-unused-disable-directives --ext ts --fix",
+    "format": "prettier ./src",
+    "format:fix": "prettier ./src --write",
+    "format:check": "prettier ./src --check",
+    "format:webview:fix": "prettier ./webview/src --write ",
     "test": "vscode-test",
     "package": "npm run check-types && node esbuild.js --production && vsce package",
     "prepare": "husky"
@@ -63,12 +68,12 @@
   },
   "lint-staged": {
     "src/**/*.{js,ts}": [
-      "eslint --fix",
-      "prettier --write"
+      "npm run lint:fix",
+      "npm run format:fix"
     ],
     "webview/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix --config webview/.eslintrc.cjs",
-      "prettier --write"
+      "npm run lint:webview:fix",
+      "npm run format:webview:fix"
     ]
   }
 }

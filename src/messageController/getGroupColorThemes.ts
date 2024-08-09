@@ -61,7 +61,8 @@ export const getGroupColorThemes = async (
       };
 
       ColorOptions.forEach((key) => setColor(key));
-      themeColors.tokenColors = setTokenColors(tokenColors);
+      themeColors.tokenColors =
+        tokenColors === undefined ? {} : setTokenColors(tokenColors);
 
       overrideUndefinedColors(themeColors);
 

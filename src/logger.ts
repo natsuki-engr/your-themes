@@ -8,7 +8,7 @@ export default class Logger {
     // prettier-ignore
     const timestamp = date.getFullYear() + '-' + pad2(date.getMonth() + 1) + '-' + pad2(date.getDate()) + ' ' + pad2(date.getHours()) + ':' + pad2(date.getMinutes()) + ':' + pad2(date.getSeconds()) + '.' + pad3(date.getMilliseconds());
     if (channel === null) {
-      channel = vscode.window.createOutputChannel("Theme View");
+      channel = vscode.window.createOutputChannel("Your Themes");
     }
     channel.appendLine("[" + timestamp + "] " + msg);
   }

@@ -13,7 +13,7 @@ export const createNewPanel = (
 ): vscode.WebviewPanel => {
   const panel = vscode.window.createWebviewPanel(
     "viewThemes",
-    "view your local themes",
+    "your local themes",
     {
       viewColumn: vscode.ViewColumn.Active,
     },

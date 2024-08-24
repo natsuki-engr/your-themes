@@ -1,7 +1,8 @@
 {
   "name": "your-themes",
+  "icon": "icon.png",
   "displayName": "Your Themes",
-  "description": "",
+  "description": "Previews of your local vscode themes",
   "version": "0.0.1",
   "publisher": "Natsuki",
   "repository": {

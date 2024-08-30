@@ -2,6 +2,8 @@
 
 This extension shows color theme previews you installed in VSCode.
 
+![demo](./img/demo.gif)
+
 ## Usage
 
 ### Preview

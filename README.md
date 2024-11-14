@@ -17,7 +17,7 @@ To display previews of your installed VSCode color themes and modify your User/W
 ### Update Settings
 
 When you select a theme in the preview, your current color theme setting will be updated immediately. At the top of the preview, you can toggle the setting target between `User` and `Workspace`.
-If no workspace workspace or folder is currently open, you won't be able to select the `Workspace` option.
+If no workspace or folder is currently open, you won't be able to select the `Workspace` option.
 
 Workspace (or folder) window:  
 ![setting targets UI with User and Workspace](./img/target-tabs.png)

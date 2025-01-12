@@ -3,7 +3,7 @@
   "icon": "icon.png",
   "displayName": "Your Themes",
   "description": "Previews of your local vscode themes",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "publisher": "Natsuki",
   "repository": {
     "type": "git",
@@ -18,7 +18,10 @@
   ],
   "activationEvents": [],
   "main": "./dist/extension.js",
-  "extensionKind": ["ui", "workspace"],
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
   "contributes": {
     "commands": [
       {

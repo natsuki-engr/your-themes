@@ -19,6 +19,7 @@ export const createNewPanel = (
     },
     {
       enableScripts: true,
+      enableFindWidget: true,
     },
   );
   const scriptPath = panel.webview.asWebviewUri(

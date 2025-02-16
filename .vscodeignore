@@ -8,6 +8,7 @@ webpack.config.js
 vsc-extension-quickstart.md
 node_modules/**
 webview/node_modules/**
+img
 
 **/tsconfig.json
 **/.eslintrc.json

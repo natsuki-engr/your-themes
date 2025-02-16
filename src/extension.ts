@@ -9,13 +9,16 @@ export function activate(context: vscode.ExtensionContext) {
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
-  let panel: vscode.WebviewPanel;
+  let panel: vscode.WebviewPanel | undefined;
 
   let disposable = vscode.commands.registerCommand(
     "your-themes.openViewer",
     async (_editBuilder, _editor, _selection, _dex) => {
       if (panel === undefined) {
         panel = createNewPanel(context);
+        panel.onDidDispose(() => {
+          panel = undefined;
+        });
       } else {
         panel.reveal(panel.viewColumn);
       }

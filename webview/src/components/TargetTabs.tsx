@@ -48,10 +48,10 @@ const TargetTabs: React.FC = () => {
     }));
 
   return (
-    <ul className="bg-vscode-editor-background sideBarSectionHeader-border sticky top-0 z-10 flex h-12 w-full items-end pe-2 ps-2 pt-2">
+    <ul className="bg-vscode-editor-background sideBarSectionHeader-border sticky top-0 z-10 flex h-12 w-full items-end gap-3 px-2 py-3">
       {targetList.map((t) => (
         <li className="block">
-          <label className="block cursor-pointer border-2 border-solid border-transparent p-3 has-[:checked]:border-b-[var(--vscode-activityBar-activeBorder)]">
+          <label className="has-[:checked]:bg-vscode-list-activeSelectionBackground bg-vscode-list-inactiveSelectionBackground hover:bg-vscode-button-secondaryHoverBackground text-vscode-button-secondaryForeground min-w-[100px] cursor-pointer rounded-md px-4 py-2 text-center font-medium transition-colors duration-200">
             {t.label}
             <input
               onChange={() => changeHandler(t.value)}

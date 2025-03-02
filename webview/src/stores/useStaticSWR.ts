@@ -1,15 +1,26 @@
-import useSWR, { Key, KeyedMutator } from "swr";
+import useSWR, { KeyedMutator } from "swr";
+import ManageState from "../controllers/manageState";
 
 export const useStaticSWR = <Data>(
-  key: Key,
+  key: string,
   initialData: Data,
 ): { data: Data; mutate: KeyedMutator<Data> } => {
-  const { data, mutate } = useSWR<Data>(key, null, {
+  // VSCodeのgetStateから保存された状態を取得
+  const savedState = ManageState.getState(key);
+
+  const { data, mutate: originalMutate } = useSWR<Data>(key, null, {
+    fallbackData: (savedState as Data) ?? initialData,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
 
-  mutate((_data) => _data || initialData, false);
+  const mutate: KeyedMutator<Data> = async (data, opts) => {
+    const result = await originalMutate(data, opts);
 
-  return { data: data ?? initialData, mutate };
+    ManageState.setState(key, result ?? null);
+
+    return result;
+  };
+
+  return { data: data as Data, mutate };
 };

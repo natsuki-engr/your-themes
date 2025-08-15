@@ -1,0 +1,24 @@
+prefix: subject
+
+Changes:
+
+Reason:
+
+BREAKING CHANGE: N/A
+Related: N/A
+Refs: N/A
+
+# ==== Prefix ====
+# feat: 新しい機能の追加や大きな改善
+# add: 新しいファイルや画像の追加・作成
+# fix: バグや問題の修正
+# tweak: 軽微な修正やリファクタリング
+# docs: ドキュメントの追加・更新
+# remove: 不要なファイルやコードの削除
+# move: ファイルやディレクトリの移動
+# test: テストの追加・更新・合格
+# front: フロントエンドの追加・更新
+# ci: CI関連の設定ファイルの追加・更新
+# initial: 初回コミット
+# chore: プロジェクトの設定ファイルなどの追加・更新
+# revert: 以前のコミットへの戻し

@@ -8,6 +8,7 @@ import {
 } from "../../../src/types/ConfigTarget";
 import { SvgColors } from "../../../src/types/svgColors";
 import { ThemeGroupInfo, ThemeInfo } from "../../../src/types/themeInfo";
+import linkIconSrc from "../assets/link-external.svg";
 import { getColorInfo } from "../controllers/getColorInfo";
 import {
   getCurrentThemeLabel,
@@ -75,9 +76,32 @@ const ThemeGroupRow: React.FC<Props> = ({ group }) => {
     };
   }, [group.themeDir, group.themes]);
 
+  const marketPlaceUrl = `https://marketplace.visualstudio.com/items?itemName=${group.id}`;
+  const isBuiltin = group.isBuiltin;
+
   return (
     <>
-      <h2 className="text-2 mb-2 mt-2 text-xl">{group.id}</h2>
+      <h2
+        className="text-2 mb-2 mt-2 flex items-end gap-2 text-xl leading-none"
+        data-is-built-in={isBuiltin}
+      >
+        {group.displayName}
+        {isBuiltin ? (
+          <span className="text-sm leading-none opacity-60">[built-in]</span>
+        ) : (
+          <a
+            href={marketPlaceUrl}
+            title="Go to Marketplace"
+            data-mask-image={linkIconSrc}
+            className="block size-4 bg-current"
+            style={{
+              maskImage: `url("${linkIconSrc}")`,
+              maskSize: "contain",
+              maskRepeat: "no-repeat",
+            }}
+          ></a>
+        )}
+      </h2>
       <div className="flex flex-wrap">
         {group.themes.map((theme) => {
           return (

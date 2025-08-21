@@ -1,5 +1,8 @@
 export interface ThemeGroupInfo {
   id: string;
+  displayName: string;
+  marketplaceUrl: string;
+  isBuiltin: boolean;
   themeDir: string;
   themes: ThemeInfo[];
 }

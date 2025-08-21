@@ -29,8 +29,14 @@ export const getThemeInfoList = (): ThemeGroupInfo[] => {
       continue;
     }
 
+    const marketPlaceUrl = `https://marketplace.visualstudio.com/items?itemName=${theme.id}`;
+    const isBuiltin = isBuiltinTheme(theme.packageJSON);
+
     themeGroupInfo.push({
       id: theme.id,
+      displayName: displayName(theme.packageJSON) ?? theme.id,
+      marketplaceUrl: marketPlaceUrl,
+      isBuiltin: isBuiltin,
       themeDir: theme.extensionPath,
       themes: packageJson.contributes.themes.filter((themes: any) =>
         isThemeInfo(themes),
@@ -61,4 +67,21 @@ const hasThemesList = (
     "themes" in packageJson.contributes &&
     Array.isArray(packageJson.contributes.themes)
   );
+};
+
+const isBuiltinTheme = (themePackageJson: unknown): boolean => {
+  return (
+    typeof themePackageJson === "object" &&
+    themePackageJson !== null &&
+    "isBuiltin" in themePackageJson &&
+    themePackageJson.isBuiltin === true
+  );
+};
+
+const displayName = (themePackageJson: ThemeGroupInfo): string | null => {
+  return typeof themePackageJson === "object" &&
+    themePackageJson !== null &&
+    "displayName" in themePackageJson
+    ? themePackageJson.displayName
+    : null;
 };

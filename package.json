@@ -45,7 +45,8 @@
     "format:check": "prettier ./src --check",
     "format:webview:fix": "prettier ./webview/src --write ",
     "test": "vscode-test",
-    "package": "npm run check-types && node esbuild.js --production && vsce package",
+    "package": "npm run check-types && npm run build:webview && node esbuild.js --production && vsce package",
+    "build:webview": "cd webview && npm run build",
     "prepare": "husky"
   },
   "devDependencies": {

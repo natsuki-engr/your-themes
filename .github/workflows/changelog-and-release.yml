@@ -39,6 +39,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install vsce
+        run: npm install -g @vscode/vsce
+
       - name: Generate changelog and release
         if: ${{ !inputs.only_publish }}
         run: |

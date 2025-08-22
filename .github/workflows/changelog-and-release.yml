@@ -55,3 +55,9 @@ jobs:
           generate_release_notes: true
           draft: false
           prerelease: false
+
+      - name: Package extension
+        run: npm run package
+
+      - name: Publish to Visual Studio Code Marketplace
+        run: npx vsce publish --pat ${{ secrets.VSCE_TOKEN }}

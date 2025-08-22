@@ -43,8 +43,8 @@ const TargetTabs: React.FC = () => {
   ]
     .filter((v) => v !== undefined)
     .map((t) => ({
-      value: t,
-      label: toTitleCase(t),
+      value: t as ConfigTargetValueType,
+      label: toTitleCase(t as ConfigTargetValueType),
     }));
 
   return (

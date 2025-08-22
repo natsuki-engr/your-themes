@@ -12,6 +12,11 @@ on:
           - major
           - minor
           - patch
+      only_publish:
+        description: 'Only publish to marketplace (skip changelog and release)'
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   changelog-and-release:
@@ -35,6 +40,7 @@ jobs:
         run: npm ci
 
       - name: Generate changelog and release
+        if: ${{ !inputs.only_publish }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
@@ -44,10 +50,17 @@ jobs:
       - name: Get new version
         id: version
         run: |
-          NEW_VERSION=$(node -p "require('./package.json').version")
+          if [ "${{ inputs.only_publish }}" = "true" ]; then
+            # Get latest git tag for only_publish mode
+            NEW_VERSION=$(git describe --tags --abbrev=0 | sed 's/^v//')
+          else
+            # Get version from package.json for normal mode
+            NEW_VERSION=$(node -p "require('./package.json').version")
+          fi
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
+        if: ${{ !inputs.only_publish }}
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.version.outputs.version }}

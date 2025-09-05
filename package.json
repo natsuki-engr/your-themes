@@ -67,6 +67,7 @@
     "prettier": "^3.3.3",
     "prettier-plugin-organize-imports": "^4.0.0",
     "typescript": "^5.4.5",
+    "vsce": "^2.15.0",
     "vscode-webview": "^1.0.1-beta.1"
   },
   "dependencies": {

@@ -1,0 +1,21 @@
+[
+  {
+    "owner": "ahmadawais",
+    "repo-name": "shades-of-purple-vscode",
+    "revision": "cbbbe8069469e20266da574237cae19ae01dd2aa",
+    "themes": {
+      "shades-of-purple-color-theme-italic": "https://raw.githubusercontent.com/ahmadawais/shades-of-purple-vscode/cbbbe8069469e20266da574237cae19ae01dd2aa/themes/shades-of-purple-color-theme-italic.json",
+      "shades-of-purple-color-theme-super-dark": "https://raw.githubusercontent.com/ahmadawais/shades-of-purple-vscode/cbbbe8069469e20266da574237cae19ae01dd2aa/themes/shades-of-purple-color-theme-super-dark.json",
+      "shades-of-purple-color-them": "https://raw.githubusercontent.com/ahmadawais/shades-of-purple-vscode/cbbbe8069469e20266da574237cae19ae01dd2aa/themes/shades-of-purple-color-theme.json"
+    }
+  },
+  {
+    "owner": "HandsomeOne",
+    "repo-name": "8bit",
+    "revision": "25a8978f8d62a10bf2d66d6daf773eb12cc22b16",
+    "themes": {
+      "dark-color-theme": "https://raw.githubusercontent.com/HandsomeOne/8bit/25a8978f8d62a10bf2d66d6daf773eb12cc22b16/themes/dark-color-theme.json",
+      "light-color-theme": "https://github.com/HandsomeOne/8bit/blob/25a8978f8d62a10bf2d66d6daf773eb12cc22b16/themes/light-color-theme.json"
+    }
+  }
+]

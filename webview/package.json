@@ -15,6 +15,7 @@
     "preview": "vite preview",
     "update-theme-configs": "node --experimental-strip-types test/utils/load-theme-configs.ts",
     "test:browser": "vitest --config=vitest.browser.config.ts",
+    "test:browser-report": "npm run test:browser -- --ui",
     "postinstall": "playwright install && playwright install-deps"
   },
   "dependencies": {
@@ -32,6 +33,7 @@
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/browser": "^3.2.4",
+    "@vitest/ui": "^3.2.4",
     "ansis": "^4.1.0",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",

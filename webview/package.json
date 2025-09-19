@@ -13,6 +13,7 @@
     "format:check": "prettier ./src --check",
     "format:fix": "prettier ./src --write",
     "preview": "vite preview",
+    "update-theme-configs": "node --experimental-strip-types test/utils/load-theme-configs.ts",
     "test:browser": "vitest --config=vitest.browser.config.ts",
     "postinstall": "playwright install && playwright install-deps"
   },

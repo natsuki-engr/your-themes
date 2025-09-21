@@ -5,6 +5,7 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   plugins: [react()],
   test: {
+    reporters: ["vitest-ctrf-json-reporter"],
     browser: {
       enabled: true,
       provider: playwright(),

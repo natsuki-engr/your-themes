@@ -86,7 +86,7 @@ jobs:
         uses: ctrf-io/github-test-reporter@v1
         if: always()
         with:
-          report-path: webview/test/report.json
+          report-path: ./webview/test/report.json
           title: '📸 Visual Regression Test Report'
           pull-request-report: true
         env:

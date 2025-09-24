@@ -27,7 +27,27 @@ jobs:
       - name: Install dependencies
         run: |
           cd webview
-          npm ci
+          npm ci --ignore-scripts
+
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: echo "version=$(cd webview && npm list playwright --depth=0 --parseable=true | grep playwright | cut -d@ -f2)" >> $GITHUB_OUTPUT
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ steps.playwright-version.outputs.version }}-${{ runner.os }}
+
+      - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: cd webview && npx playwright install chromium --with-deps
+
+      - run: npx playwright install --with-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+      - run: npx playwright install-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Run VRT tests
         run: |

@@ -16,7 +16,7 @@
     "update-theme-configs": "node --experimental-strip-types test/utils/load-theme-configs.ts",
     "test:browser": "vitest --config=vitest.browser.config.ts",
     "test:browser-report": "npm run test:browser -- --ui",
-    "postinstall": "playwright install && playwright install-deps"
+    "postinstall": "playwright install chromium && playwright install-deps chromium"
   },
   "dependencies": {
     "@vscode/webview-ui-toolkit": "^1.4.0",

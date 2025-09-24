@@ -1,0 +1,146 @@
+// @ts-check
+
+const fs = require("fs");
+const path = require("path");
+
+/**
+ * @param {string} dirPath
+ * @param {string[]} arrayOfFiles
+ * @returns {string[]}
+ */
+function getAllFiles(dirPath, arrayOfFiles = []) {
+  if (!fs.existsSync(dirPath)) return arrayOfFiles;
+
+  const files = fs.readdirSync(dirPath);
+  files.forEach((file) => {
+    const fullPath = path.join(dirPath, file);
+    if (fs.statSync(fullPath).isDirectory()) {
+      arrayOfFiles = getAllFiles(fullPath, arrayOfFiles);
+    } else {
+      arrayOfFiles.push(fullPath);
+    }
+  });
+  return arrayOfFiles;
+}
+
+/**
+ * @param {number} prNumber
+ * @param {string} repoName
+ * @returns {string}
+ */
+function generateVRTComment(prNumber, repoName) {
+  const baseUrl = `https://${repoName.split('/')[0]}.github.io/${repoName.split('/')[1]}/vrt-images/pr-${prNumber}`;
+
+  // Check for expected images (baseline)
+  const expectedDir = "./webview/test/vrt/__screenshots__";
+  const actualDir = "./webview/.vitest-attachments";
+
+  const expectedFiles = fs.existsSync(expectedDir)
+    ? getAllFiles(expectedDir).filter(f => f.endsWith('.png'))
+    : [];
+
+  const actualFiles = fs.existsSync(actualDir)
+    ? getAllFiles(actualDir).filter(f => f.endsWith('.png'))
+    : [];
+
+  if (expectedFiles.length === 0 && actualFiles.length === 0) {
+    return `## 📸 Visual Regression Test Results
+
+No screenshots found for comparison.`;
+  }
+
+  let comment = `## 📸 Visual Regression Test Results\n\n`;
+
+  // Analyze changes
+  const diffImages = actualFiles.filter(f => f.includes('.diff.') || f.includes('-diff-'));
+  const actualImages = actualFiles.filter(f =>
+    (f.includes('.actual.') || f.includes('-actual-')) &&
+    !f.includes('.diff.') && !f.includes('-diff-')
+  );
+
+  if (diffImages.length > 0) {
+    comment += `### 🔍 Visual Changes Detected (${diffImages.length})\n\n`;
+
+    diffImages.forEach(diffPath => {
+      const filename = path.basename(diffPath);
+      const testName = filename
+        .replace('.diff.', '.')
+        .replace('-diff-', '-')
+        .replace('.png', '')
+        .replace(/-(chromium|firefox|webkit).*$/, ''); // Remove browser suffix
+
+      comment += `#### ${testName}\n\n`;
+
+      // Find corresponding actual and expected images
+      const actualImg = actualImages.find(f => {
+        const actualFilename = path.basename(f);
+        return actualFilename.includes(testName) || testName.includes(actualFilename.replace('.png', '').split('-')[0]);
+      });
+
+      const expectedImg = expectedFiles.find(f => {
+        const expectedFilename = path.basename(f);
+        return expectedFilename.includes(testName) || testName.includes(expectedFilename.replace('.png', '').split('-')[0]);
+      });
+
+      comment += `<table><tr>\n`;
+
+      // Expected (before)
+      if (expectedImg) {
+        const expectedFilename = path.basename(expectedImg);
+        comment += `<td><strong>Expected</strong><br/><img src="${baseUrl}/${expectedFilename}" alt="Expected" width="300"/></td>\n`;
+      }
+
+      // Actual (after)
+      if (actualImg) {
+        const actualFilename = path.basename(actualImg);
+        comment += `<td><strong>Actual</strong><br/><img src="${baseUrl}/${actualFilename}" alt="Actual" width="300"/></td>\n`;
+      }
+
+      comment += `</tr><tr>\n`;
+
+      // Diff
+      comment += `<td colspan="2"><strong>Difference</strong><br/><img src="${baseUrl}/${filename}" alt="Diff" width="600"/></td>\n`;
+
+      comment += `</tr></table>\n\n`;
+    });
+  } else if (actualImages.length > 0) {
+    comment += `### ✅ No Visual Changes Detected\n\n`;
+    comment += `All ${actualImages.length} screenshot(s) match the expected baselines.\n\n`;
+
+    // Show thumbnails of current screenshots
+    comment += `<details>\n<summary>📷 Current Screenshots (${actualImages.length})</summary>\n\n`;
+
+    actualImages.forEach(actualPath => {
+      const filename = path.basename(actualPath);
+      const testName = filename.replace('.png', '').replace(/-(chromium|firefox|webkit).*$/, '');
+      comment += `**${testName}**<br/>\n`;
+      comment += `<img src="${baseUrl}/${filename}" alt="${testName}" width="200"/>\n\n`;
+    });
+
+    comment += `</details>\n\n`;
+  } else {
+    comment += `### ℹ️ Test Status\n\n`;
+    comment += `Expected images: ${expectedFiles.length}\n`;
+    comment += `No actual/diff images found - tests may have failed or not run.\n\n`;
+  }
+
+  // Add summary statistics
+  comment += `### 📊 Summary\n\n`;
+  comment += `- **Expected images**: ${expectedFiles.length}\n`;
+  comment += `- **Actual images**: ${actualImages.length}\n`;
+  comment += `- **Differences detected**: ${diffImages.length}\n\n`;
+
+  if (diffImages.length > 0) {
+    comment += `> ⚠️ **Visual changes detected!** Please review the differences above.\n\n`;
+  } else if (actualImages.length > 0) {
+    comment += `> ✅ **All tests passed!** No visual regressions detected.\n\n`;
+  }
+
+  comment += `---\n`;
+  comment += `*Images hosted at: ${baseUrl}*\n`;
+  comment += `*Generated by GitHub Actions*`;
+
+  return comment;
+}
+
+module.exports = { generateVRTComment };
